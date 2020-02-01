@@ -8,7 +8,7 @@ public class EnemyMoveRandom : MonoBehaviour
     Rigidbody rg;
     private CharacterController controller;
     private float speed;
-    public float gravity = 20.0F;
+    private float gravity = 20.0F;
     private float angle;
     private Vector3 moveDirection;
 
@@ -37,12 +37,9 @@ public class EnemyMoveRandom : MonoBehaviour
     {
 
         EnemyMove();
-        RayTarget();
-
         if (enemymove == false)
         {
             StopCoroutine(EnemyFloat());
-            
         }
     }
 
@@ -55,7 +52,7 @@ public class EnemyMoveRandom : MonoBehaviour
 
         SetAngle();
 
-        second = Random.Range(0.5f, 5);
+        second = Random.Range(1, 5);
 
 
         yield return new WaitForSeconds(second);
@@ -65,35 +62,29 @@ public class EnemyMoveRandom : MonoBehaviour
 
 
     /*
-     * 敵の向く方向をランダムで決定
+     *敵の向きをランダムで決める
      */
     private void SetAngle()
     {
-            float max = 1;
-            float min = -1;
-            x = Random.Range(min, max);
-            z = Random.Range(min, max);
-
-
-           
-        
+        float max = 360;
+        float min = 0;
+        angle = Random.Range(min, max); 
     }
-
     /*
-     * 敵の向き
-     */
-     private void EnemyRotate(float x,float z)
+    * 敵の向き
+    */
+    void EnemyAngle()
     {
         var currentAngle = transform.eulerAngles.y;
-        transform.eulerAngles = new Vector3(0, Mathf.LerpAngle(currentAngle, Angle(x, z) * Mathf.Rad2Deg, 0.1f), 0);
+        transform.eulerAngles = new Vector3(0, Mathf.LerpAngle(currentAngle, angle, Time.deltaTime), 0);
     }
-    float Angle(float x, float z)
+    /*
+     * 反対に向く
+     */
+    void OppositeRotate()
     {
-        float theta;
-
-        theta = Mathf.Atan2(x, z);
-
-        return theta;
+        var currentAngle = transform.eulerAngles.y;
+        angle = (currentAngle + 180);
     }
 
     /*
@@ -105,40 +96,42 @@ public class EnemyMoveRandom : MonoBehaviour
         controller = GetComponent<CharacterController>();
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(transform.forward * Time.deltaTime * speed);
-        EnemyRotate(x, z);
-        //Debug.Log("x成分" + x + "z成分" + z);
+        RayTarget();
+        EnemyAngle();
+
+
+
+        Debug.Log("x成分" + x + "z成分" + z);
 
     }
 
-    
 
-    
+
+
 
     void RayTarget()
     {
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
-        float distance = 5f;
+        float distance = 2f;
         Debug.DrawLine(ray.origin, ray.direction * distance + ray.origin, Color.red);
 
         if (Physics.Raycast(ray, out hit, distance, LayerMask.GetMask("Wall")))
         {
-            //if (hit.collider.CompareTag("Wall"))
-            //{
-                Debug.Log("目の前に壁がある" + hit.collider.name);
-            transform.eulerAngles += new Vector3(0, Mathf.LerpAngle(transform.eulerAngles.y, transform.eulerAngles.y+180, 0.1f), 0);
-            //SetAngle();
-            StopCoroutine(EnemyFloat());
-                enemymove = false;
-                Debug.Log(enemymove);
-            //}
+            Debug.Log("目の前に壁がある" + hit.collider.name);
+            OppositeRotate();
+            //StopCoroutine(EnemyFloat());
+            enemymove = false;
+            Debug.Log(enemymove);
         }
         else
         {
             enemymove = true;
-            StartCoroutine(EnemyFloat());
+            //StartCoroutine(EnemyFloat());
             Debug.Log(enemymove);
 
         }
     }
+
+    
 }
