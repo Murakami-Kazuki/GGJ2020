@@ -97,6 +97,17 @@ public class EnemyMoveRandom : MonoBehaviour
         moveDirection = transform.TransformDirection(moveDirection);
         moveDirection *= speed;
         moveDirection.y -= gravity * Time.deltaTime;
+
+        if (controller.isGrounded)   
+        {
+            moveDirection.y = 0f;  
+            moveDirection = transform.forward * speed;
+        }
+        else  //CharacterControllerの付いているこのオブジェクトが接地していない場合の処理
+        {
+            moveDirection.y -= gravity * Time.deltaTime;  //マイナスのY方向（下向き）に重力を与える
+        }
+
         controller.Move(transform.forward * Time.deltaTime * speed);
         RayTarget();
         EnemyAngle();
