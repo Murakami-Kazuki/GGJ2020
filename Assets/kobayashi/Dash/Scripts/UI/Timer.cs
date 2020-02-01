@@ -11,6 +11,8 @@ namespace Dash
         [SerializeField] Text text;
         float timer = 0;
 
+        bool isAnnounce = false;
+
 
         public void StartTimer()
         {
@@ -25,6 +27,11 @@ namespace Dash
             while (0 < timer)
             {
                 timer -= Time.deltaTime;
+                if (!isAnnounce && timer <= 15f)
+                {
+                    isAnnounce = true;
+                    GameManager.Instance.Announce();
+                }
                 UpdateText();
                 yield return null;
             }

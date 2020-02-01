@@ -28,6 +28,7 @@ namespace Dash
         }
 
         [SerializeField] PanelSwitcher panelSwitcher;
+        [SerializeField] AnnounceUI announceUI;
 
         [SerializeField] AnnounceType currentAnnounceType;
         public AnnounceType CurrentAnnounceType
@@ -69,6 +70,11 @@ namespace Dash
         {
             Debug.Log("finish game");
             panelSwitcher.SwitchPanel(BasePanel.PanelType.End);
+        }
+
+        public void Announce()
+        {
+            announceUI.Show();
         }
     }
 }

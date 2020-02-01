@@ -10,7 +10,7 @@ namespace Dash
     {
         [SerializeField] protected Image fillArea;
         protected float minValue = 0f;
-        protected float maxValue = 1f;
+        protected float maxValue = 0.574f;
         public float FillAmount
         {
             get { return fillArea.fillAmount; }
@@ -31,8 +31,10 @@ namespace Dash
         {
             get
             {
-                if (fillArea.fillAmount < 0.33f) return 1;
-                if (fillArea.fillAmount < 0.66f) return 2;
+                var normalized = Mathf.Clamp01(fillArea.fillAmount / maxValue);
+
+                if (normalized < 0.33f) return 1;
+                if (normalized < 0.66f) return 2;
 
                 return 3;
             }
@@ -49,10 +51,11 @@ namespace Dash
             UpdateFillAmount(amount);
         }
 
+        //idealFillAmount: 0~1
         public void UpdateFillAmount(float idealFillAmount, float duration, Action onFinish = null)
         {
             startFillAmount = fillArea.fillAmount;
-            endFillAmount = Mathf.Clamp01(idealFillAmount);
+            endFillAmount = ConvertGaugeRate(idealFillAmount);
             if (startFillAmount == endFillAmount) return;
             if (duration <= 0) duration = 0.01f;
             if (fillCor != null) StopCoroutine(fillCor);
@@ -62,7 +65,12 @@ namespace Dash
         //もしアクションを使う場合
         public void UpdatePowerCallback(float currentRate)
         {
-            UpdateFillAmount(currentRate, 0.2f);
+            UpdateFillAmount(ConvertGaugeRate(currentRate), 0.2f);
+        }
+
+        float ConvertGaugeRate(float currentRate)
+        {
+            return Mathf.Lerp(minValue, maxValue, currentRate);
         }
     }
 }
