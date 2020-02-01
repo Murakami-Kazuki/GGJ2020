@@ -19,7 +19,7 @@ public class KomaControl : MonoBehaviour
 
     IEnumerator ShowKomaList()
     {
-        yield return null;
+        yield return new WaitForSeconds(1f);
         for (int n = 0; n < komaList.Count; n++)
         {
             yield return komaList[n].Show();
@@ -50,7 +50,7 @@ public class KomaControl : MonoBehaviour
     bool IsPressButton()
     {
         //TODO 入力受付
-        if (Input.GetButtonDown("DS4square"))
+        if (Input.GetButtonDown("DS4square") || Input.GetKey(KeyCode.A))
         {
             return true;
         }
@@ -62,8 +62,9 @@ public class KomaControl : MonoBehaviour
     {
         Debug.Log("ok. trans next scene.");
 
-        FadeManager.Instance.Fade(new Color(1, 1, 1, 0), Color.white, 0.2f, false, () =>
+        FadeManager.Instance.Fade(new Color(1, 1, 1, 0), Color.white, 0.4f, false, () =>
         {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("gameScene");
             //TODO trans next scene
         });
 

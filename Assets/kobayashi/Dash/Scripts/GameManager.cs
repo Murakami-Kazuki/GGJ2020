@@ -69,7 +69,17 @@ namespace Dash
         public void FinishGame()
         {
             Debug.Log("finish game");
-            panelSwitcher.SwitchPanel(BasePanel.PanelType.End);
+            panelSwitcher.ActivatePanel(BasePanel.PanelType.Finish);
+            StartCoroutine(Finish());
+        }
+
+        IEnumerator Finish()
+        {
+            yield return new WaitForSeconds(1f);
+            FadeManager.Instance.Fade(new Color(1, 1, 1, 0), Color.white, 1f, false, () =>
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
+            });
         }
 
         public void Announce()
