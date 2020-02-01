@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class playerControl : SingletonMonoBehaviour<playerControl>
 {
+
+    private const int PARAM_maxSTR = 3;
+    private const int PARAM_minSTR = 1;
+
+
+
     private float AngleSpeed = 90f;//回転スピード
     private float moveX = 0.0f;
     private float moveZ = 0.0f;
@@ -77,7 +83,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
         {
             if (hagage < maxHagage)
             {
-                hagage += 10;
+                hagage += 300f * Time.deltaTime;
             }
         }
 
@@ -106,11 +112,11 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
 
     }
 
-    /*void FixedUpdate()
+    void FixedUpdate()
     {
         //rb.velocity = new Vector3(moveX * speed, 0, -1 * (moveZ * speed)) * Time.deltaTime;
         //rb.AddForce(moveX * speed, 0, moveZ * speed);
-    }*/
+    }
 
     float GetAim(Vector3 from, Vector3 to)
     {
@@ -134,14 +140,21 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
 
 
     public List<GameObject> hairObject;
-    public void AddHair(GameObject _hairObject)
+    public void AddHair(GameObject[] _hairObject)
     {
-        hairObject.Add(_hairObject);
-        _hairObject.transform.parent = transform;
-        _hairObject.transform.localPosition = Vector3.up * 1.50f;
-        _hairObject.transform.Rotate(Vector3.up * (Random.value - 0.5f) * 360f,Space.World);
-        _hairObject.transform.Rotate(Vector3.right * (Random.value - 0.5f) * 50f, Space.Self);
+        for (int i = 0; i < _hairObject.Length; i++)
+        {
+            if (_hairObject[i] == null)
+                continue;
+            hairObject.Add(_hairObject[i]);
+            _hairObject[i].transform.parent = transform;
+            _hairObject[i].transform.localPosition = Vector3.up * 1.50f;
+            _hairObject[i].transform.Rotate(Vector3.up * (Random.value - 0.5f) * 360f, Space.World);
+            _hairObject[i].transform.Rotate(Vector3.right * (Random.value - 0.5f) * 50f, Space.Self);
+        }
+       
     }
+
 
     //private void OnTriggerEnter(Collider collision)
     //{
@@ -163,29 +176,27 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
+
         {
-            Debug.Log("OnCollison!!!");
             if (isAttack)
             {
                 AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObject());
-               
-                
             }
             else
             {
-                collision.gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObject(3));
+                collider.gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObjects(3));
             }
 
         }
     }
 
-    public GameObject[] DamegeAndSendHairObject(int damege)
+    public GameObject[] DamegeAndSendHairObjects(int damage)
     {
-        GameObject[] SendObject = new GameObject[3];
-
-        Debug.Log("Damage");
-        for (int i = 0; i < damege; i++)
+        GameObject[] SendObject = new GameObject[damage];
+        for (int i = 0; i < damage; i++)
         {
+            if (hairObject.Count <= 0)
+                break;
             int randomID = Random.RandomRange(0, hairObject.Count);
             SendObject[i] = hairObject[randomID];
             hairObject.RemoveAt(randomID);

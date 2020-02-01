@@ -17,26 +17,27 @@ public class EnemyHairManager : MonoBehaviour
     }
 
 
-    public GameObject AttackAndGetHairObject()
+    public GameObject[] AttackAndGetHairObjects(int damage)
     {
-        int randomID = Random.RandomRange(0, hairObject.Count);
-        GameObject _hairObject = null;
-        _hairObject = hairObject[randomID];
-        hairObject.Remove(hairObject[randomID]);
-        for (int i = 0; i < hairObject.Count; i++)
+        GameObject[] _hairObject = new GameObject[damage];
+        for (int i = 0; i < damage; i++)
         {
-            hairObject[i].SetActive(false);
+            if (hairObject.Count <= 0)
+                break;
+            int randomID = Random.RandomRange(0, hairObject.Count);
+            _hairObject[i] = hairObject[randomID];
+            hairObject.RemoveAt(randomID);
         }
         hairObject.Clear();
-       
         return _hairObject;
-            
     }
 
     public void AddHaire(GameObject[] hair)
     {
         for (int i = 0; i < hair.Length; i++)
         {
+            if (hair[i] == null)
+                continue;
             hairObject.Add(hair[i]);
             hair[i].transform.parent = transform;
             hair[i].transform.localPosition = Vector3.up * 0.8f;
