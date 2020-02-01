@@ -29,6 +29,12 @@ namespace Dash
 
         [SerializeField] PanelSwitcher panelSwitcher;
 
+        [SerializeField] AnnounceType currentAnnounceType;
+        public AnnounceType CurrentAnnounceType
+        {
+            get { return currentAnnounceType; }
+        }
+
         void Awake()
         {
             FadeManager.Instance.Fade(Color.white, new Color(1, 1, 1, 0), 1f, true, () =>

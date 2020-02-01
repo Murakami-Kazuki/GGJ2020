@@ -46,5 +46,11 @@ namespace Dash
             if (fillCor != null) StopCoroutine(fillCor);
             fillCor = StartCoroutine(DoCoroutine(duration, null, UpdateFillAmount, onFinish));
         }
+
+        //もしアクションを使う場合
+        public void UpdatePowerCallback(float currentRate)
+        {
+            UpdateFillAmount(currentRate, 0.2f);
+        }
     }
 }

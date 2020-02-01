@@ -6,7 +6,7 @@ namespace Dash
 {
     public class BasePanel : MonoBehaviour
     {
-        [SerializeField] PanelType type;
+        [SerializeField] PanelType type = PanelType.Start;
         public PanelType MyType
         {
             get { return type; }
