@@ -47,7 +47,7 @@ namespace Title
         {
             isPressButton = true;
             //TODO scene移動
-            fade.FadeIn(0.4f, TransNextScene);
+            fade.FadeOut(0.4f, TransNextScene);
         }
 
 

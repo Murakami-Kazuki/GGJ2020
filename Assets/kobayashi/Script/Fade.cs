@@ -22,7 +22,7 @@ namespace Title
         //fade終了後にonfinishを呼ぶ
         //duration:fade時間(s)
         /// </summary>
-        public void FadeIn(float duration, Action onFinish)
+        public void FadeOut(float duration, Action onFinish)
         {
             if (fadeCor != null) StopCoroutine(fadeCor);
             fadeCor = StartCoroutine(PlayFade(duration, onFinish));
