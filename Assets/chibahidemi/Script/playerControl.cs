@@ -185,4 +185,9 @@ public class playerControl : MonoBehaviour
         return SendObject;
 
     }
+
+    public float getHagage()
+    {
+        return hagage;
+    }
 }
