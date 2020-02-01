@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerControl : MonoBehaviour
+public class playerControl : SingletonMonoBehaviour<playerControl>
 {
 
     private const int PARAM_maxSTR = 3;
@@ -155,17 +155,36 @@ public class playerControl : MonoBehaviour
        
     }
 
-    private void OnTriggerEnter(Collider collider)
+
+    //private void OnTriggerEnter(Collider collision)
+    //{
+    //    Debug.Log("hoge");
+    //    if (collision.gameObject.tag == "Enemy")
+    //    {
+    //        Debug.Log("OnCollison!!!");
+    //        if (isAttack)
+    //        {
+    //            AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObject());
+    //        }
+    //        else
+    //        {
+    //            collision.gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObject(3));
+    //        }
+
+    //    }
+    //}
+    private void OnCollisionEnter(Collision collision)
     {
-        if (collider.gameObject.tag == "Enemy")
+        if (collision.gameObject.CompareTag("Enemy"))
+
         {
             if (isAttack)
             {
-                AddHair(collider.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObjects(9));
+                AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObjects(4));
             }
             else
             {
-                collider.gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObjects(3));
+                GetComponent<Collider>().gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObjects(3));
             }
 
         }
