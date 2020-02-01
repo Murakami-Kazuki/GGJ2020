@@ -12,9 +12,13 @@ namespace Title
 
         CanvasGroup canvas;
 
-        void Start()
+        void Awake()
         {
             canvas = GetComponent<CanvasGroup>();
+        }
+
+        public void Show()
+        {
             StartCoroutine(Flash(flashDuration));
         }
 

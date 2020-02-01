@@ -30,7 +30,14 @@ namespace Title
 
         public Action onNextSceneAction;
         [SerializeField] Fade fade;
+        [SerializeField] PressKeyText pressKeyText;
         bool isPressButton = false;
+
+        void Start()
+        {
+            pressKeyText.Show();
+        }
+
         void Update()
         {
             if (!isPressButton && IsPressButton()) OnPressAnyButton();
