@@ -27,6 +27,7 @@ namespace Title
         void NextSceneActionCallback()
         {
             StopBGM();
+            myAudio.PlayOneShot(buttonPress);
         }
 
         void StopBGM()
