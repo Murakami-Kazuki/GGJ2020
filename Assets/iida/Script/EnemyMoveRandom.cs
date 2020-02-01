@@ -12,7 +12,7 @@ public class EnemyMoveRandom : MonoBehaviour
         
         StartCoroutine(EnemyFloat());
         SetAngle();
-        
+        transform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
 
     }
 

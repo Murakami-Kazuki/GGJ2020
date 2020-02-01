@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyMoveChase : MonoBehaviour
 {
-    //Player player;//プレヤーができたら
-    [SerializeField] GameObject player;
     Vector3 player_pos;
     float speed;
     public float TargetRange;
@@ -30,11 +28,15 @@ public class EnemyMoveChase : MonoBehaviour
     }
     bool NearPlayer()
     {
-        player_pos = player.transform.position;
+        player_pos = playerControl.Instance.gameObject.transform.position;
         float distance = (transform.position - player_pos).sqrMagnitude;
-        if (distance < TargetRange)
+        if (distance < TargetRange && distance > 2f)
         {
-            return true;
+
+                return true;
+   
+           
+
         }
 
         return false;
@@ -54,7 +56,9 @@ public class EnemyMoveChase : MonoBehaviour
     {
         if (NearPlayer() || is_player)
         {
-            transform.LookAt(player_pos);
+            transform.LookAt(new Vector3(player_pos.x,transform.position.y,player_pos.z));
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().AddForce(transform.forward * GetComponent<EnemyManager>().EnemySpeed, ForceMode.Impulse);
             Debug.Log("敵を追いかける");
         }
         Debug.Log(NearPlayer()+ ""+  is_player);
