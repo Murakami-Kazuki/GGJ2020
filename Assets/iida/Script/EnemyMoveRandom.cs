@@ -5,10 +5,9 @@ using UnityEngine;
 public class EnemyMoveRandom : MonoBehaviour
 {
     EnemyManager enemy;
-    Rigidbody rg;
     private CharacterController controller;
     private float speed;
-    private float gravity = 20.0F;
+    private float gravity = 20.0f;
     private float angle;
     private Vector3 moveDirection;
 
@@ -16,20 +15,19 @@ public class EnemyMoveRandom : MonoBehaviour
     float x;
     float z;
 
-    bool enemymove = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        rg = GetComponent<Rigidbody>();
-
-    }
+    bool enemymove;
 
     void OnEnable()
     {
-        moveDirection = Vector3.zero;
+        
         StartCoroutine(EnemyFloat());
-        speed = GetComponent<EnemyManager>().EnemySpeed;
+        enemymove = true;
+        enemy = GetComponent<EnemyManager>();
+        speed = enemy.EnemySpeed;
+        SetAngle();
+        
+
     }
 
     // Update is called once per frame
@@ -66,9 +64,11 @@ public class EnemyMoveRandom : MonoBehaviour
      */
     private void SetAngle()
     {
+        
         float max = 360;
         float min = 0;
-        angle = Random.Range(min, max); 
+
+        if(enemymove)angle = Random.Range(min, max); 
     }
     /*
     * 敵の向き
@@ -94,14 +94,13 @@ public class EnemyMoveRandom : MonoBehaviour
     {
 
         controller = GetComponent<CharacterController>();
+        moveDirection = transform.TransformDirection(moveDirection);
+        moveDirection *= speed;
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(transform.forward * Time.deltaTime * speed);
         RayTarget();
         EnemyAngle();
-
-
-
-        Debug.Log("x成分" + x + "z成分" + z);
+        //Debug.Log("x成分" + x + "z成分" + z);
 
     }
 
@@ -118,16 +117,13 @@ public class EnemyMoveRandom : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, distance, LayerMask.GetMask("Wall")))
         {
-            Debug.Log("目の前に壁がある" + hit.collider.name);
             OppositeRotate();
-            //StopCoroutine(EnemyFloat());
             enemymove = false;
             Debug.Log(enemymove);
         }
         else
         {
             enemymove = true;
-            //StartCoroutine(EnemyFloat());
             Debug.Log(enemymove);
 
         }
