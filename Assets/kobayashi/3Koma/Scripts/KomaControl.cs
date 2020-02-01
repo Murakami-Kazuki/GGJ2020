@@ -23,5 +23,38 @@ public class KomaControl : MonoBehaviour
 
         yield return null;
         pressKeyText.Show();
+
+        StartCoroutine(WaitForTap());
+    }
+
+
+    IEnumerator WaitForTap()
+    {
+        var isTapped = false;
+        while (!isTapped)
+        {
+            if (IsPressButton())
+            {
+                TransNextScene();
+                isTapped = true;
+            }
+
+            yield return null;
+        }
+
+    }
+
+    bool IsPressButton()
+    {
+        //TODO 入力受付
+        if (Input.GetMouseButtonDown(0)) return true;
+        return false;
+    }
+
+    void TransNextScene()
+    {
+        Debug.Log("ok. trans next scene.");
+
+        //TODO trans next scene
     }
 }
