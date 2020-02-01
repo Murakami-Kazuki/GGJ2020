@@ -4,8 +4,14 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 
-public class BaseKoma : MonoBehaviour
+public class BaseKoma : Title.UIParts
 {
+
+    protected override void Awake()
+    {
+        base.Awake();
+        GetComponent<Image>().enabled = false;
+    }
 
     public virtual IEnumerator Show()
     {
