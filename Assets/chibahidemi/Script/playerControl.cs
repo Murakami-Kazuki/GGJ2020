@@ -15,7 +15,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
     private float moveZ = 0.0f;
     public Rigidbody rb;
 
-    public bool isAttack=false;
+    public bool isAttack = false;
 
     float targetAngle;
     Vector3 lookAtVec;
@@ -24,12 +24,12 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
     float hagage = 0.0f;
     float maxHagage = 300f;//ハゲージのmaxの値
     float AttackPower = 0.5f;//ダッシュの速さ
+    [SerializeField] Dash.HaGauge haGaugeUI; //ハゲージのUI
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-
+        aniCon = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -63,7 +63,8 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
             moveX = Input.GetAxis("Horizontal");
             lookAtVectol();
         }
-        else {
+        else
+        {
             moveX = 0;
         }
 
@@ -72,38 +73,41 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
             moveZ = Input.GetAxis("Vertical");
             lookAtVectol();
         }
-        else {
+        else
+        {
             moveZ = 0;
         }
 
         lookAtVec = new Vector3(moveX, 0, -moveZ);
 
         //ボタン押してゲージをためる
-        if (Input.GetButton("DS4square"))
+        if (Input.GetButton("DS4square") || Input.GetKey(KeyCode.A))
         {
             if (hagage < maxHagage)
             {
                 hagage += 300f * Time.deltaTime;
+                haGaugeUI.UpdatePowerCallback(Mathf.Clamp01(hagage / maxHagage)); //ゲージの表示
             }
+            else haGaugeUI.UpdatePowerCallback(1f);
         }
 
         //ボタン離すとダッシュ
-        if (Input.GetButtonUp("DS4square"))
+        if (Input.GetButtonUp("DS4square") || Input.GetKeyUp(KeyCode.A))
         {
             rb.AddForce(transform.forward * hagage * AttackPower, ForceMode.Impulse);
             if (0.0f <= hagage && hagage < 100f) PlayAnimation(AnimationType.attack0);
             if (100.0f <= hagage && hagage < 200f) PlayAnimation(AnimationType.attack1);
             if (200.0f <= hagage && hagage < 900f) PlayAnimation(AnimationType.attack2);
             hagage = 0;
-
+            haGaugeUI.UpdatePowerCallback(0f); //ゲージをリセット
         }
         //Debug.Log(hagage);
 
-        
+
         //ダッシュ後の挙動
         if (1f < rb.velocity.magnitude)
         {
-            
+
             //rb.AddForce(transform.right * moveX*100);
             //rb.AddForce(transform.forward * AttackPower * 100f,ForceMode.Acceleration);
             isAttack = true;
@@ -157,7 +161,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
             _hairObject[i].transform.Rotate(Vector3.up * (Random.value - 0.5f) * 360f, Space.World);
             _hairObject[i].transform.Rotate(Vector3.right * (Random.value - 0.5f) * 50f, Space.Self);
         }
-       
+
     }
 
 
@@ -226,8 +230,8 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
     /// </summary>
     private void PlayAnimation(AnimationType animationType)
     {
-        if (aniCon == null)
-            aniCon = transform.Find("model").GetComponent<Animator>();
+        if (aniCon == null) return;
+
         switch (animationType)
         {
             case AnimationType.stay:

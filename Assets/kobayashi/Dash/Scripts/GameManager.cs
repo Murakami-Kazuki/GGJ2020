@@ -28,6 +28,7 @@ namespace Dash
         }
 
         [SerializeField] PanelSwitcher panelSwitcher;
+        [SerializeField] AnnounceUI announceUI;
 
         [SerializeField] AnnounceType currentAnnounceType;
         public AnnounceType CurrentAnnounceType
@@ -54,6 +55,8 @@ namespace Dash
             StartCountdown();
         }
 
+        #region game step
+
         public void StartCountdown()
         {
             panelSwitcher.SwitchPanel(BasePanel.PanelType.Start);
@@ -68,7 +71,30 @@ namespace Dash
         public void FinishGame()
         {
             Debug.Log("finish game");
-            panelSwitcher.SwitchPanel(BasePanel.PanelType.End);
+            panelSwitcher.ActivatePanel(BasePanel.PanelType.Finish);
+            StartCoroutine(Finish());
+        }
+
+        IEnumerator Finish()
+        {
+            yield return new WaitForSeconds(1f);
+            FadeManager.Instance.Fade(new Color(1, 1, 1, 0), Color.white, 1f, false, () =>
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
+            });
+        }
+
+        #endregion
+
+        void SetAnnounceType()
+        {
+            currentAnnounceType = (AnnounceType)Random.Range(0, 4);
+            SaveData.SaveAnnounce(currentAnnounceType);
+        }
+
+        public void Announce()
+        {
+            announceUI.Show();
         }
     }
 }
