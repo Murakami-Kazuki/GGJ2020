@@ -11,6 +11,8 @@ public class EnemyManager : MonoBehaviour
     private Vector3 moveDirection;
     private float gravity = 20.0f;
 
+
+    EnemyHairManager enemyHair;
     public bool bald;
 
     // Start is called before the first frame update
@@ -27,6 +29,7 @@ public class EnemyManager : MonoBehaviour
     private void OnEnable()
     {
         InitializeSpeed = EnemySpeed;
+        enemyHair = GetComponent<EnemyHairManager>();
 
     }
     /*
@@ -87,18 +90,34 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-
-
-    void Damage()
+    
+    void Hit()
+    {
+        if (bald)
+        {
+            TakeHair();
+        }
+        else
+        {
+            GetHair();
+        }
+    }
+    void TakeHair()
+    {
+       
+    }
+    void GetHair()
     {
 
     }
-
+     
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.CompareTag("Player"))
         {
             Debug.Log("hit");
+            Hit();
+
         }     
     }
 
