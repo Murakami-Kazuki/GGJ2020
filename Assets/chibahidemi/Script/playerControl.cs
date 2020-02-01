@@ -22,6 +22,8 @@ public class playerControl : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+
     }
 
     // Update is called once per frame
@@ -95,7 +97,7 @@ public class playerControl : MonoBehaviour
             
             //rb.AddForce(transform.right * moveX*100);
             Debug.Log("moved:" + rb.velocity.magnitude);
-            rb.AddForce(transform.forward * AttackPower * 100f,ForceMode.Acceleration);
+            //rb.AddForce(transform.forward * AttackPower * 100f,ForceMode.Acceleration);
         }
 
     }
@@ -126,5 +128,29 @@ public class playerControl : MonoBehaviour
         transform.eulerAngles = Vector3.up * angleY;
     }
 
-    
+
+    public List<GameObject> hairObject;
+    public void AddHair(GameObject _hairObject)
+    {
+        hairObject.Add(_hairObject);
+        _hairObject.transform.parent = transform;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObject());
+
+
+        }
+    }
+
+    public void RemoveHair(int damege)
+    {
+        for (int i = 0; i < damege; i++)
+        {
+            hairObject.RemoveAt(Random.RandomRange(0, hairObject.Count));
+        }
+    }
 }
