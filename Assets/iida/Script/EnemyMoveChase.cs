@@ -29,7 +29,7 @@ public class EnemyMoveChase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        EnemyMove();
     }
     bool NearPlayer()
     {
@@ -48,9 +48,6 @@ public class EnemyMoveChase : MonoBehaviour
     private void EnemyMove()
     {
         FindPlayer();
-        controller = GetComponent<CharacterController>();
-        moveDirection.y -= gravity * Time.deltaTime;
-        controller.Move(transform.forward * Time.deltaTime * speed);
         RayTarget();
 
     }
@@ -61,13 +58,9 @@ public class EnemyMoveChase : MonoBehaviour
         if (NearPlayer() && is_player)
         {
             transform.LookAt(player_pos);
-            EnemyMove();
-            GetComponent<EnemyMoveRandom>().enabled = false;
             Debug.Log("敵を追いかける");
-        }else{
-            GetComponent<EnemyMoveRandom>().enabled = true;
         }
-
+        Debug.Log(NearPlayer()+ ""+  is_player);
     }
 
     void RayTarget()
@@ -75,7 +68,7 @@ public class EnemyMoveChase : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
         
         RaycastHit hit;
-        float distance = 2f;
+        float distance = 20f;
         Debug.DrawLine(ray.origin, ray.direction * distance + ray.origin, Color.red);
 
         if (Physics.Raycast(ray, out hit, distance, LayerMask.GetMask("Player")))

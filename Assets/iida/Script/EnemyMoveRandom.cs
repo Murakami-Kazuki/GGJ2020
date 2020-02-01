@@ -113,18 +113,16 @@ public class EnemyMoveRandom : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
         float distance = 2f;
-        Debug.DrawLine(ray.origin, ray.direction * distance + ray.origin, Color.red);
+        //Debug.DrawLine(ray.origin, ray.direction * distance + ray.origin, Color.red);
 
         if (Physics.Raycast(ray, out hit, distance, LayerMask.GetMask("Wall")))
         {
             OppositeRotate();
             enemymove = false;
-            Debug.Log(enemymove);
         }
         else
         {
             enemymove = true;
-            Debug.Log(enemymove);
 
         }
     }
