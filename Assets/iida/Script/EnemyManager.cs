@@ -26,7 +26,7 @@ public class EnemyManager : MonoBehaviour
     void Update()
     {
         EnemyMove();
-
+        CheckEnemyHair();
     }
     private void OnEnable()
     {
@@ -38,7 +38,15 @@ public class EnemyManager : MonoBehaviour
 
 
     }
-    
+    void CheckEnemyHair()
+    {
+
+        if (enemyHair.hairObject.Count == 0)
+        {
+            Debug.Log("ハゲ");
+            bald = true;
+        }
+    }
 
     /*
     * 敵の向き
