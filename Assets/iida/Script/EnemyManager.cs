@@ -6,7 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     [Header("敵速度")] public float EnemySpeed;
     [HideInInspector] public float InitializeSpeed;
-    [HideInInspector]public float angle;
+    [HideInInspector] public float angle;
     private CharacterController controller;
     private Vector3 moveDirection;
     private float gravity = 20.0f;
@@ -38,7 +38,7 @@ public class EnemyManager : MonoBehaviour
 
 
     }
-    
+
 
     /*
     * 敵の向き
@@ -54,7 +54,7 @@ public class EnemyManager : MonoBehaviour
     public void OppositeRotate()
     {
         var currentAngle = transform.eulerAngles.y;
-        angle = currentAngle + (180 * Random.Range(-1,1));
+        angle = currentAngle + (180 * Random.Range(-1, 1));
     }
 
 
@@ -67,7 +67,7 @@ public class EnemyManager : MonoBehaviour
         rb.AddForce(transform.forward * EnemySpeed, ForceMode.Force);
         RayTarget();
         EnemyAngle(angle);
-        
+
     }
 
     void RayTarget()
@@ -83,7 +83,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    
+
     void Hit()
     {
         if (bald)
@@ -97,23 +97,30 @@ public class EnemyManager : MonoBehaviour
     }
     void TakeHair()
     {
-       
+
     }
     void GetHair()
     {
 
     }
-     
+
+    void Knockback(Collision collision)
+    {
+        var c_rb = collision.transform.gameObject.GetComponent<Rigidbody>();
+        c_rb.AddForce(transform.forward * 5, ForceMode.Impulse);
+
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.CompareTag("Player"))
         {
             Debug.Log("hit");
+            Knockback(collision);
             Hit();
 
-        }     
+
+        }
     }
-
-
 }
         
