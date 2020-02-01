@@ -29,22 +29,25 @@ namespace Title
         }
 
         public Action onNextSceneAction;
+        [SerializeField] Fade fade;
+        bool isPressButton = false;
         void Update()
         {
-            if (IsPressButton()) OnTapAnyButton();
+            if (!isPressButton && IsPressButton()) OnPressAnyButton();
         }
 
         bool IsPressButton()
         {
             //TODO 入力受付
-            if (Input.GetMouseButton(0)) return true;
+            if (Input.GetMouseButtonDown(0)) return true;
             return false;
         }
 
-        void OnTapAnyButton()
+        void OnPressAnyButton()
         {
+            isPressButton = true;
             //TODO scene移動
-            TransNextScene();
+            fade.FadeIn(0.4f, TransNextScene);
         }
 
 
