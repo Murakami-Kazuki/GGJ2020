@@ -26,6 +26,18 @@ namespace Dash
             fillArea.fillAmount = rate;
         }
 
+        //ゲージによってたまるlevel
+        public int GaugeLevel
+        {
+            get
+            {
+                if (fillArea.fillAmount < 0.33f) return 1;
+                if (fillArea.fillAmount < 0.66f) return 2;
+
+                return 3;
+            }
+        }
+
         float startFillAmount;
         float endFillAmount;
         protected Coroutine fillCor;
