@@ -12,6 +12,7 @@ public class EnemyManager : MonoBehaviour
     private float gravity = 20.0f;
 
 
+    Rigidbody rb;
     EnemyHairManager enemyHair;
     public bool bald;
 
@@ -25,13 +26,28 @@ public class EnemyManager : MonoBehaviour
     void Update()
     {
         EnemyMove();
+        CheckEnemyHair();
     }
     private void OnEnable()
     {
         InitializeSpeed = EnemySpeed;
         enemyHair = GetComponent<EnemyHairManager>();
+        enemyHair = GetComponent<EnemyHairManager>();
+        rb = GetComponent<Rigidbody>();
+        angle = Random.Range(0, 360);
+
 
     }
+    void CheckEnemyHair()
+    {
+
+        if (enemyHair.hairObject.Count == 0)
+        {
+            Debug.Log("ハゲ");
+            bald = true;
+        }
+    }
+
     /*
     * 敵の向き
     */
@@ -55,25 +71,11 @@ public class EnemyManager : MonoBehaviour
     */
     private void EnemyMove()
     {
-        controller = GetComponent<CharacterController>();
-        moveDirection = transform.TransformDirection(moveDirection);
-        moveDirection *= EnemySpeed;
-        moveDirection.y -= gravity * Time.deltaTime;
 
-        if (controller.isGrounded)
-        {
-            moveDirection.y = 0f;
-            moveDirection = transform.forward * EnemySpeed;
-        }
-        else 
-        {
-            moveDirection.y -= gravity * Time.deltaTime; 
-        }
-
-        controller.Move(transform.forward * Time.deltaTime * EnemySpeed);
+        rb.AddForce(transform.forward * EnemySpeed, ForceMode.Force);
         RayTarget();
         EnemyAngle(angle);
-
+        
     }
 
     void RayTarget()
@@ -81,7 +83,6 @@ public class EnemyManager : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
         float distance = 2f;
-        //Debug.DrawLine(ray.origin, ray.direction * distance + ray.origin, Color.red);
 
         if (Physics.Raycast(ray, out hit, distance, LayerMask.GetMask("Wall")))
         {
