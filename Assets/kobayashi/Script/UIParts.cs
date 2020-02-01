@@ -3,24 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class UIParts : MonoBehaviour
+namespace Title
 {
-
-    protected IEnumerator DoCoroutine(float duration, AnimationCurve animationCurve, Action<AnimationCurve, float> action, Action onFinish = null)
+    public class UIParts : MonoBehaviour
     {
-        var timer = 0f;
-        var rate = 0f;
 
-        while (rate < 1)
+        protected IEnumerator DoCoroutine(float duration, AnimationCurve animationCurve, Action<AnimationCurve, float> action, Action onFinish = null)
         {
-            timer += Time.deltaTime;
-            rate = Mathf.Clamp01(timer / duration);
+            var timer = 0f;
+            var rate = 0f;
 
-            action.Invoke(animationCurve, rate);
-            yield return null;
+            while (rate < 1)
+            {
+                timer += Time.deltaTime;
+                rate = Mathf.Clamp01(timer / duration);
+
+                action.Invoke(animationCurve, rate);
+                yield return null;
+            }
+
+            if (onFinish != null)
+                onFinish();
         }
-
-        if (onFinish != null)
-            onFinish();
     }
 }

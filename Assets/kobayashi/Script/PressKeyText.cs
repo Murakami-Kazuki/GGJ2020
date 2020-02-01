@@ -2,43 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CanvasGroup))]
-public class PressKeyText : UIParts
+namespace Title
 {
-    [SerializeField] AnimationCurve flashCurve;
-    [SerializeField] float flashDuration;
-
-    CanvasGroup canvas;
-
-    void Start()
+    [RequireComponent(typeof(CanvasGroup))]
+    public class PressKeyText : UIParts
     {
-        canvas = GetComponent<CanvasGroup>();
-        StartCoroutine(Flash(flashDuration));
-    }
+        [SerializeField] AnimationCurve flashCurve;
+        [SerializeField] float flashDuration;
 
-    IEnumerator Flash(float duration)
-    {
-        while (true)
+        CanvasGroup canvas;
+
+        void Start()
         {
-            UpdateAlpha(0, 1f, flashDuration);
-            yield return new WaitForSeconds(flashDuration + 0.2f);
-            UpdateAlpha(1f, 0f, flashDuration);
-            yield return new WaitForSeconds(flashDuration);
+            canvas = GetComponent<CanvasGroup>();
+            StartCoroutine(Flash(flashDuration));
         }
-    }
 
-    float startAlpha;
-    float endAlpha;
-    void UpdateAlpha(AnimationCurve curve, float rate)
-    {
-        rate = curve.Evaluate(rate);
-        canvas.alpha = Mathf.Lerp(startAlpha, endAlpha, rate);
-    }
+        IEnumerator Flash(float duration)
+        {
+            while (true)
+            {
+                UpdateAlpha(0, 1f, flashDuration);
+                yield return new WaitForSeconds(flashDuration + 0.2f);
+                UpdateAlpha(1f, 0f, flashDuration);
+                yield return new WaitForSeconds(flashDuration);
+            }
+        }
 
-    void UpdateAlpha(float sAlpha, float eAlpha, float duration)
-    {
-        startAlpha = sAlpha;
-        endAlpha = eAlpha;
-        StartCoroutine(DoCoroutine(duration, flashCurve, UpdateAlpha));
+        float startAlpha;
+        float endAlpha;
+        void UpdateAlpha(AnimationCurve curve, float rate)
+        {
+            rate = curve.Evaluate(rate);
+            canvas.alpha = Mathf.Lerp(startAlpha, endAlpha, rate);
+        }
+
+        void UpdateAlpha(float sAlpha, float eAlpha, float duration)
+        {
+            startAlpha = sAlpha;
+            endAlpha = eAlpha;
+            StartCoroutine(DoCoroutine(duration, flashCurve, UpdateAlpha));
+        }
     }
 }
