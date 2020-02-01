@@ -39,6 +39,9 @@ public class EnemyHairManager : MonoBehaviour
         {
             hairObject.Add(hair[i]);
             hair[i].transform.parent = transform;
+            hair[i].transform.localPosition = Vector3.up * 0.8f;
+            hair[i].transform.Rotate(Vector3.up * (Random.value - 0.5f) * 360f, Space.World);
+            hair[i].transform.Rotate(Vector3.right * (Random.value - 0.5f) * 50f, Space.Self);
         }
     }
 

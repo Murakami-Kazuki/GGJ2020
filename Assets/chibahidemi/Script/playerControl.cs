@@ -138,6 +138,9 @@ public class playerControl : MonoBehaviour
     {
         hairObject.Add(_hairObject);
         _hairObject.transform.parent = transform;
+        _hairObject.transform.localPosition = Vector3.up * 1.50f;
+        _hairObject.transform.Rotate(Vector3.up * (Random.value - 0.5f) * 360f,Space.World);
+        _hairObject.transform.Rotate(Vector3.right * (Random.value - 0.5f) * 50f, Space.Self);
     }
 
     private void OnTriggerEnter(Collider collision)
