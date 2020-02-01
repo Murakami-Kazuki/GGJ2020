@@ -45,7 +45,7 @@ namespace Result
             for (int n = 0; n < 3; n++)
             {
                 var type = (HairType)n;
-                hairDict.Add(type, HairCountData.Load(type));
+                hairDict.Add(type, SaveData.LoadHair(type));
             }
         }
 

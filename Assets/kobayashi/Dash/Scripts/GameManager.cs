@@ -55,6 +55,8 @@ namespace Dash
             StartCountdown();
         }
 
+        #region game step
+
         public void StartCountdown()
         {
             panelSwitcher.SwitchPanel(BasePanel.PanelType.Start);
@@ -80,6 +82,14 @@ namespace Dash
             {
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Result");
             });
+        }
+
+        #endregion
+
+        void SetAnnounceType()
+        {
+            currentAnnounceType = (AnnounceType)Random.Range(0, 4);
+            SaveData.SaveAnnounce(currentAnnounceType);
         }
 
         public void Announce()

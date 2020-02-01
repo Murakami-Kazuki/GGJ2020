@@ -4296,8 +4296,8 @@ MonoBehaviour:
   hairResult: {fileID: 1672054947}
   pointList:
   - {fileID: 1637828439}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2144393379}
+  - {fileID: 91412484}
   resultText: {fileID: 1593416078}
   background: {fileID: 883932830}
 --- !u!1 &376944625
@@ -6314,7 +6314,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u9E97\u3057\u3055"
+  m_Text: "\u3044\u304B\u3081\u3057\u3055"
 --- !u!222 &517739907
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27183,7 +27183,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u9E97\u3057\u3055"
+  m_Text: "\u731B\u3005\u3057\u3055"
 --- !u!222 &1927710877
 CanvasRenderer:
   m_ObjectHideFlags: 0
