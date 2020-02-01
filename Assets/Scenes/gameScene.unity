@@ -648,6 +648,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &562609491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1254327412257071313, guid: 2188f7745d7934896b83a45505549858,
+    type: 3}
+  m_PrefabInstance: {fileID: 2001115068}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &562609492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562609491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2acba1fd554ca44748fb51462aec8ccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &613986479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1203,6 +1221,11 @@ PrefabInstance:
       propertyPath: haGaugeUI
       value: 
       objectReference: {fileID: 1523086330000684921}
+    - target: {fileID: 1254327412257071315, guid: 2188f7745d7934896b83a45505549858,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1254327412257071336, guid: 2188f7745d7934896b83a45505549858,
         type: 3}
       propertyPath: m_LocalPosition.x
