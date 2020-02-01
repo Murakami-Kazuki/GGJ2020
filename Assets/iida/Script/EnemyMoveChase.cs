@@ -6,10 +6,7 @@ public class EnemyMoveChase : MonoBehaviour
 {
     //Player player;//プレヤーができたら
     [SerializeField] GameObject player;
-    private Vector3 moveDirection;
-    private CharacterController controller;
     Vector3 player_pos;
-    private float gravity = 20;
     float speed;
     public float TargetRange;
 
@@ -35,7 +32,7 @@ public class EnemyMoveChase : MonoBehaviour
     {
         player_pos = player.transform.position;
         float distance = (transform.position - player_pos).sqrMagnitude;
-        if (distance < TargetRange * TargetRange)
+        if (distance < TargetRange)
         {
             return true;
         }
