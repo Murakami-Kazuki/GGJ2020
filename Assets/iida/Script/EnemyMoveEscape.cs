@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class EnemyMoveEscape : MonoBehaviour
 {
-    //Player player;//プレヤーができたら
-    [SerializeField] GameObject player;
+
     EnemyManager enemy;
     Vector3 player_pos;
     public float TargetRange;
@@ -29,7 +28,7 @@ public class EnemyMoveEscape : MonoBehaviour
 
     bool NearPlayer()
     {
-        player_pos = player.transform.position;
+        player_pos = playerControl.Instance.gameObject.transform.position;
         float distance = (transform.position - player_pos).sqrMagnitude;
         if (distance < TargetRange)
         {

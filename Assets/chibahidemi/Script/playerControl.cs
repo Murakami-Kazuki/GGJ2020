@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerControl : MonoBehaviour
+public class playerControl : SingletonMonoBehaviour<playerControl>
 {
     private float AngleSpeed = 90f;//回転スピード
     private float moveX = 0.0f;
@@ -143,14 +143,33 @@ public class playerControl : MonoBehaviour
         _hairObject.transform.Rotate(Vector3.right * (Random.value - 0.5f) * 50f, Space.Self);
     }
 
-    private void OnTriggerEnter(Collider collision)
+    //private void OnTriggerEnter(Collider collision)
+    //{
+    //    Debug.Log("hoge");
+    //    if (collision.gameObject.tag == "Enemy")
+    //    {
+    //        Debug.Log("OnCollison!!!");
+    //        if (isAttack)
+    //        {
+    //            AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObject());
+    //        }
+    //        else
+    //        {
+    //            collision.gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObject(3));
+    //        }
+
+    //    }
+    //}
+    private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("OnCollison!!!");
             if (isAttack)
             {
                 AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObject());
+               
+                
             }
             else
             {
