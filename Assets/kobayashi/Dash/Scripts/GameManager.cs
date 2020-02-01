@@ -35,6 +35,12 @@ namespace Dash
             get { return currentAnnounceType; }
         }
 
+        [SerializeField] float gameDuration = 60;
+        public float GameDuration
+        {
+            get { return gameDuration; }
+        }
+
         void Awake()
         {
             FadeManager.Instance.Fade(Color.white, new Color(1, 1, 1, 0), 1f, true, () =>
@@ -55,11 +61,13 @@ namespace Dash
 
         public void StartGame()
         {
+            Debug.Log("start game");
             panelSwitcher.SwitchPanel(BasePanel.PanelType.Game);
         }
 
         public void FinishGame()
         {
+            Debug.Log("finish game");
             panelSwitcher.SwitchPanel(BasePanel.PanelType.End);
         }
     }
