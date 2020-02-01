@@ -10,6 +10,9 @@ public class EnemyManager : MonoBehaviour
     private CharacterController controller;
     private Vector3 moveDirection;
     private float gravity = 20.0f;
+
+    public bool bald;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,7 @@ public class EnemyManager : MonoBehaviour
     private void OnEnable()
     {
         InitializeSpeed = EnemySpeed;
+
     }
     /*
     * 敵の向き
@@ -43,10 +47,9 @@ public class EnemyManager : MonoBehaviour
     }
 
 
-
     /*
- *敵の動き
- */
+    *敵の動き
+    */
     private void EnemyMove()
     {
         controller = GetComponent<CharacterController>();
@@ -69,6 +72,7 @@ public class EnemyManager : MonoBehaviour
         EnemyAngle(angle);
 
     }
+
     void RayTarget()
     {
         Ray ray = new Ray(transform.position, transform.forward);
@@ -85,4 +89,19 @@ public class EnemyManager : MonoBehaviour
 
 
 
+    void Damage()
+    {
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            Debug.Log("hit");
+        }     
+    }
+
+
 }
+        

@@ -7,18 +7,10 @@ public class EnemyMoveRandom : MonoBehaviour
     private float angle;
 
 
-
-    float x;
-    float z;
-
-
-    public bool enemymove;
-
     void OnEnable()
     {
         
         StartCoroutine(EnemyFloat());
-        enemymove = true;
         SetAngle();
         
 
@@ -28,11 +20,6 @@ public class EnemyMoveRandom : MonoBehaviour
     void Update()
     {
 
-        if (enemymove == false)
-        {
-            StopCoroutine(EnemyFloat());
-        }
-        if(enemymove == false) Debug.Log(enemymove);
     }
 
     /*
@@ -62,7 +49,7 @@ public class EnemyMoveRandom : MonoBehaviour
         float max = 360;
         float min = 0;
 
-        if(enemymove)angle = Random.Range(min, max); 
+        angle = Random.Range(min, max); 
     }
 
     

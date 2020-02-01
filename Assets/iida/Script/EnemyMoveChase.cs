@@ -52,7 +52,7 @@ public class EnemyMoveChase : MonoBehaviour
 
     void FindPlayer()
     {
-        if (NearPlayer() && is_player)
+        if (NearPlayer() || is_player)
         {
             transform.LookAt(player_pos);
             Debug.Log("敵を追いかける");
@@ -65,10 +65,10 @@ public class EnemyMoveChase : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
         
         RaycastHit hit;
-        float distance = 20f;
+        float distance = 10f;
         Debug.DrawLine(ray.origin, ray.direction * distance + ray.origin, Color.red);
 
-        if (Physics.Raycast(ray, out hit, distance, LayerMask.GetMask("Player")))
+        if (Physics.SphereCast(ray, 4, out hit, distance, LayerMask.GetMask("Player")))
         {
             Debug.Log("目の前にプレイヤーがいる" + hit.collider.name);
             is_player = true;
