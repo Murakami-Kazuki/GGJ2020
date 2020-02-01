@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class playerControl : MonoBehaviour
 {
-
-    private const int PARAM_maxSTR = 3;
-    private const int PARAM_minSTR = 1;
-
-
-
     private float AngleSpeed = 90f;//回転スピード
     private float moveX = 0.0f;
     private float moveZ = 0.0f;
@@ -83,7 +77,7 @@ public class playerControl : MonoBehaviour
         {
             if (hagage < maxHagage)
             {
-                hagage += 300f * Time.deltaTime;
+                hagage += 10;
             }
         }
 
@@ -112,11 +106,11 @@ public class playerControl : MonoBehaviour
 
     }
 
-    void FixedUpdate()
+    /*void FixedUpdate()
     {
         //rb.velocity = new Vector3(moveX * speed, 0, -1 * (moveZ * speed)) * Time.deltaTime;
         //rb.AddForce(moveX * speed, 0, moveZ * speed);
-    }
+    }*/
 
     float GetAim(Vector3 from, Vector3 to)
     {
@@ -140,44 +134,39 @@ public class playerControl : MonoBehaviour
 
 
     public List<GameObject> hairObject;
-    public void AddHair(GameObject[] _hairObject)
+    public void AddHair(GameObject _hairObject)
     {
-        for (int i = 0; i < _hairObject.Length; i++)
-        {
-            if (_hairObject[i] == null)
-                continue;
-            hairObject.Add(_hairObject[i]);
-            _hairObject[i].transform.parent = transform;
-            _hairObject[i].transform.localPosition = Vector3.up * 1.50f;
-            _hairObject[i].transform.Rotate(Vector3.up * (Random.value - 0.5f) * 360f, Space.World);
-            _hairObject[i].transform.Rotate(Vector3.right * (Random.value - 0.5f) * 50f, Space.Self);
-        }
-       
+        hairObject.Add(_hairObject);
+        _hairObject.transform.parent = transform;
+        _hairObject.transform.localPosition = Vector3.up * 1.50f;
+        _hairObject.transform.Rotate(Vector3.up * (Random.value - 0.5f) * 360f,Space.World);
+        _hairObject.transform.Rotate(Vector3.right * (Random.value - 0.5f) * 50f, Space.Self);
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collider.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
+            Debug.Log("OnCollison!!!");
             if (isAttack)
             {
-                AddHair(collider.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObjects(9));
+                AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObject());
             }
             else
             {
-                collider.gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObjects(3));
+                collision.gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObject(3));
             }
 
         }
     }
 
-    public GameObject[] DamegeAndSendHairObjects(int damage)
+    public GameObject[] DamegeAndSendHairObject(int damege)
     {
-        GameObject[] SendObject = new GameObject[damage];
-        for (int i = 0; i < damage; i++)
+        GameObject[] SendObject = new GameObject[3];
+
+        Debug.Log("Damage");
+        for (int i = 0; i < damege; i++)
         {
-            if (hairObject.Count <= 0)
-                break;
             int randomID = Random.RandomRange(0, hairObject.Count);
             SendObject[i] = hairObject[randomID];
             hairObject.RemoveAt(randomID);
