@@ -65,12 +65,18 @@ namespace Dash
         //もしアクションを使う場合
         public void UpdatePowerCallback(float currentRate)
         {
-            UpdateFillAmount(ConvertGaugeRate(currentRate), 0.2f);
+            UpdateFillAmount(currentRate, 0.2f);
         }
 
         float ConvertGaugeRate(float currentRate)
         {
             return Mathf.Lerp(minValue, maxValue, currentRate);
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            ResetFillAmount();
         }
     }
 }
