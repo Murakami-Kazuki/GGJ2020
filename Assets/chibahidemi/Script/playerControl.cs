@@ -9,7 +9,7 @@ public class playerControl : MonoBehaviour
     private float moveZ = 0.0f;
     public Rigidbody rb;
 
-
+    public bool isAttack=false;
 
     float targetAngle;
     Vector3 lookAtVec;
@@ -96,8 +96,12 @@ public class playerControl : MonoBehaviour
         {
             
             //rb.AddForce(transform.right * moveX*100);
-            Debug.Log("moved:" + rb.velocity.magnitude);
             //rb.AddForce(transform.forward * AttackPower * 100f,ForceMode.Acceleration);
+            isAttack = true;
+        }
+        else
+        {
+            isAttack = false;
         }
 
     }
@@ -136,21 +140,35 @@ public class playerControl : MonoBehaviour
         _hairObject.transform.parent = transform;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObject());
-
+            Debug.Log("OnCollison!!!");
+            if (isAttack)
+            {
+                AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObject());
+            }
+            else
+            {
+                collision.gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObject(3));
+            }
 
         }
     }
 
-    public void RemoveHair(int damege)
+    public GameObject[] DamegeAndSendHairObject(int damege)
     {
+        GameObject[] SendObject = new GameObject[3];
+
+        Debug.Log("Damage");
         for (int i = 0; i < damege; i++)
         {
-            hairObject.RemoveAt(Random.RandomRange(0, hairObject.Count));
+            int randomID = Random.RandomRange(0, hairObject.Count);
+            SendObject[i] = hairObject[randomID];
+            hairObject.RemoveAt(randomID);
         }
+        return SendObject;
+
     }
 }

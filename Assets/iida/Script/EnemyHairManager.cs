@@ -23,13 +23,23 @@ public class EnemyHairManager : MonoBehaviour
         GameObject _hairObject = null;
         _hairObject = hairObject[randomID];
         hairObject.Remove(hairObject[randomID]);
-        hairObject.Clear();
-        for(int i = 0; i < hairObject.Count; i++)
+        for (int i = 0; i < hairObject.Count; i++)
         {
             hairObject[i].SetActive(false);
         }
+        hairObject.Clear();
+       
         return _hairObject;
             
+    }
+
+    public void AddHaire(GameObject[] hair)
+    {
+        for (int i = 0; i < hair.Length; i++)
+        {
+            hairObject.Add(hair[i]);
+            hair[i].transform.parent = transform;
+        }
     }
 
 
