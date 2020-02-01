@@ -27,6 +27,7 @@ namespace Dash
 
             countdownText.text = "0";
 
+            GameManager.Instance.StartGame();
         }
     }
 }

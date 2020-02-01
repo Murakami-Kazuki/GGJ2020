@@ -13,10 +13,10 @@ namespace Dash
             SortPanelOrder();
         }
 
-        void Start()
+        /*void Start()
         {
             SwitchPanel(BasePanel.PanelType.Start);
-        }
+        }*/
 
         Dictionary<BasePanel.PanelType, BasePanel> panelDict = new Dictionary<BasePanel.PanelType, BasePanel>();
         /// <summary>
@@ -29,7 +29,7 @@ namespace Dash
             panelList = panelList.OrderBy(eventer => eventer.MyType).ToList();
             foreach (var e in panelList)
             {
-                if (!e.gameObject.activeSelf) e.gameObject.SetActive(false);
+                if (e.gameObject.activeSelf) e.gameObject.SetActive(false);
                 panelDict[e.MyType] = e;
             }
         }
