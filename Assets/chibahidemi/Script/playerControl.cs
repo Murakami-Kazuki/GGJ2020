@@ -180,11 +180,11 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
         {
             if (isAttack)
             {
-                AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObject());
+                AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObjects(4));
             }
             else
             {
-                collider.gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObjects(3));
+                GetComponent<Collider>().gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObjects(3));
             }
 
         }
