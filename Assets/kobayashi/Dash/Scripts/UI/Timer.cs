@@ -7,13 +7,14 @@ namespace Dash
 {
     public class Timer : MonoBehaviour
     {
-        [SerializeField] float duration;
+        float duration;
         [SerializeField] Text text;
         float timer = 0;
 
 
         public void StartTimer()
         {
+            duration = GameManager.Instance.GameDuration;
             StartCoroutine(Countdown());
         }
 
@@ -29,6 +30,8 @@ namespace Dash
             }
 
             text.text = "00:00:00";
+
+            GameManager.Instance.FinishGame();
         }
 
         void UpdateText()

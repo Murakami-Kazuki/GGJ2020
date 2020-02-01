@@ -45,7 +45,7 @@ namespace Title
         bool IsPressButton()
         {
             //TODO 入力受付
-            if (Input.GetButtonDown("DS4x") || Input.GetButtonDown("DS4o") || Input.GetButtonDown("DS4shikaku") || Input.GetButtonDown("DS4sankaku"))
+            if (Input.GetButtonDown("DS4square"))
             {
                 return true;
             }

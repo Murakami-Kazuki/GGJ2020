@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelSwitcher: {fileID: 557026865}
+  currentAnnounceType: 0
 --- !u!4 &178981750
 Transform:
   m_ObjectHideFlags: 0
