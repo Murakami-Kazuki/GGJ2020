@@ -17,7 +17,7 @@ namespace Result
         {
             background.gameObject.SetActive(false);
             //ShowResult(AnnounceType.MojaMoja);
-            FadeManager.Instance.Fade(Color.white, new Color(1, 1, 1, 0), 1f);
+            FadeManager.Instance.Fade(Color.white, new Color(1, 1, 1, 0), 1f, true);
         }
 
         /// <summary>

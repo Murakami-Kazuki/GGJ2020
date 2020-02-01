@@ -64,7 +64,7 @@ public class FadeManager : MonoBehaviour
         background.color = Color.Lerp(startColor, endColor, rate);
     }
 
-    public void Fade(Color _startColor, Color _endColor, float duration, Action action = null)
+    public void Fade(Color _startColor, Color _endColor, float duration, bool isHideOnFinish, Action action = null)
     {
         startColor = _startColor;
         endColor = _endColor;
@@ -73,17 +73,20 @@ public class FadeManager : MonoBehaviour
         if (cor != null) StopCoroutine(cor);
         cor = StartCoroutine(DoCoroutine(duration, null, ChangeColor, () =>
         {
-            background.enabled = false;
-            background.gameObject.SetActive(false);
+            if (isHideOnFinish)
+            {
+                background.enabled = false;
+                background.gameObject.SetActive(false);
+            }
             if (action != null) action();
         }));
 
     }
 
     //フェードをかける
-    public void Fade(Color _endColor, float duration, Action action = null)
+    public void Fade(Color _endColor, float duration, bool isHideOnFinish, Action action = null)
     {
-        Fade(background.color, _endColor, duration, action);
+        Fade(background.color, _endColor, duration, isHideOnFinish, action);
     }
 
     Coroutine cor;

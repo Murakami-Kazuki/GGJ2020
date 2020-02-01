@@ -29,7 +29,6 @@ namespace Title
         }
 
         public Action onNextSceneAction;
-        [SerializeField] Fade fade;
         [SerializeField] PressKeyText pressKeyText;
         bool isPressButton = false;
 
@@ -54,7 +53,7 @@ namespace Title
         {
             isPressButton = true;
             //TODO scene移動
-            fade.FadeOut(0.4f, TransNextScene);
+            FadeManager.Instance.Fade(new Color(1, 1, 1, 0), Color.white, 0.4f, false, TransNextScene);
         }
 
 
