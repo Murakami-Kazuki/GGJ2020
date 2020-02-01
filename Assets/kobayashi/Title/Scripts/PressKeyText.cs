@@ -8,7 +8,7 @@ namespace Title
     public class PressKeyText : UIParts
     {
         [SerializeField] AnimationCurve flashCurve;
-        [SerializeField] float flashDuration;
+        [SerializeField] float flashDuration = 0.8f;
 
         CanvasGroup canvas;
 

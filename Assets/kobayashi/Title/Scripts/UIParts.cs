@@ -7,7 +7,6 @@ namespace Title
 {
     public class UIParts : MonoBehaviour
     {
-
         protected IEnumerator DoCoroutine(float duration, AnimationCurve animationCurve, Action<AnimationCurve, float> action, Action onFinish = null)
         {
             var timer = 0f;
