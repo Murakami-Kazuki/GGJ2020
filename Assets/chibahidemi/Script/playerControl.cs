@@ -91,6 +91,9 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
         if (Input.GetButtonUp("DS4square"))
         {
             rb.AddForce(transform.forward * hagage * AttackPower, ForceMode.Impulse);
+            if (0.0f <= hagage && hagage < 100f) PlayAnimation(AnimationType.attack0);
+            if (100.0f <= hagage && hagage < 200f) PlayAnimation(AnimationType.attack1);
+            if (200.0f <= hagage && hagage < 900f) PlayAnimation(AnimationType.attack2);
             hagage = 0;
 
         }
@@ -104,10 +107,12 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
             //rb.AddForce(transform.right * moveX*100);
             //rb.AddForce(transform.forward * AttackPower * 100f,ForceMode.Acceleration);
             isAttack = true;
+            aniCon.SetBool("isAttack", true);
         }
         else
         {
             isAttack = false;
+            aniCon.SetBool("isAttack", false);
         }
 
     }
@@ -180,7 +185,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
         {
             if (isAttack)
             {
-                AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObjects(4));
+                AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObjects(3));
             }
             else
             {
@@ -203,5 +208,51 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
         }
         return SendObject;
 
+    }
+
+
+
+    private Animator aniCon;
+    private enum AnimationType
+    {
+        stay,
+        charge,
+        attack0,
+        attack1,
+        attack2,
+    }
+    /// <summary>
+    /// アニメーション再生
+    /// </summary>
+    private void PlayAnimation(AnimationType animationType)
+    {
+        if (aniCon == null)
+            aniCon = transform.Find("model").GetComponent<Animator>();
+        switch (animationType)
+        {
+            case AnimationType.stay:
+                aniCon.Play("chara_stay");
+                break;
+            case AnimationType.charge:
+                aniCon.Play("chara_charge");
+                break;
+            case AnimationType.attack0:
+                aniCon.Play("chara_attack0");
+                break;
+            case AnimationType.attack1:
+                aniCon.Play("chara_attack1");
+                break;
+            case AnimationType.attack2:
+                aniCon.Play("chara_attack2");
+                break;
+        }
+    }
+
+
+
+
+    public float getHagage()
+    {
+        return hagage;
     }
 }
