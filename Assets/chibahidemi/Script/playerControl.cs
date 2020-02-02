@@ -25,6 +25,8 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
     float maxHagage = 300f;//ハゲージのmaxの値
     float AttackPower = 0.5f;//ダッシュの速さ
     [SerializeField] Dash.HaGauge haGaugeUI; //ハゲージのUI
+    [SerializeField] PlayerCanvas playerCanvas;
+    int attackLevel; //アタック時のレベル
     // Start is called before the first frame update
     void Start()
     {
@@ -99,6 +101,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
             if (100.0f <= hagage && hagage < 200f) PlayAnimation(AnimationType.attack1);
             if (200.0f <= hagage && hagage < 900f) PlayAnimation(AnimationType.attack2);
             hagage = 0;
+            attackLevel = haGaugeUI.GaugeLevel;
             haGaugeUI.UpdatePowerCallback(0f); //ゲージをリセット
         }
         //Debug.Log(hagage);
@@ -160,6 +163,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
             _hairObject[i].transform.localPosition = Vector3.up * 1.50f;
             _hairObject[i].transform.Rotate(Vector3.up * (Random.value - 0.5f) * 360f, Space.World);
             _hairObject[i].transform.Rotate(Vector3.right * (Random.value - 0.5f) * 50f, Space.Self);
+            playerCanvas.GetHair(_hairObject[i].GetComponent<BaseHair>().myType);
         }
 
     }
@@ -184,19 +188,16 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
     //}
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
-
+        if (!collision.gameObject.CompareTag("Enemy")) return;
+        if (!isAttack)
         {
-            if (isAttack)
-            {
-                AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObjects(3));
-            }
-            else
-            {
-                GetComponent<Collider>().gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObjects(3));
-            }
-
+            GetComponent<Collider>().gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObjects(3));
+            return;
         }
+
+        if (attackLevel == 0) return;
+        if (attackLevel == 1) AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObjects(1));
+        if (attackLevel == 2) AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObjects(10)); //10ではなく全部
     }
 
     public GameObject[] DamegeAndSendHairObjects(int damage)
