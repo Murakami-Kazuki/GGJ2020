@@ -136,6 +136,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
             {
                 hagage += 300f * Time.deltaTime;
                 haGaugeUI.UpdatePowerCallback(Mathf.Clamp01(hagage / maxHagage)); //ゲージの表示
+                StartCoroutine(playerVoice.Instance.ChargeVC());
             }
             else haGaugeUI.UpdatePowerCallback(1f);
         }
@@ -143,6 +144,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
         //ボタン離すとダッシュ
         if (Input.GetButtonUp("DS4square") || Input.GetKeyUp(KeyCode.A))
         {
+            StartCoroutine(playerVoice.Instance.ScreemVC());
             rb.AddForce(transform.forward * hagage * param_attackPower, ForceMode.Impulse);
             if (0.0f <= hagage && hagage < 100f) PlayAnimation(AnimationType.attack0);
             if (100.0f <= hagage && hagage < 200f) PlayAnimation(AnimationType.attack1);
