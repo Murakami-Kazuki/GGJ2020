@@ -26,28 +26,41 @@ public class playerVoice : SingletonMonoBehaviour<playerVoice>
             cooltime = true;
             int number;
             number = Random.Range(1, 3);
+            
             if (number == 1) audioSource.clip = screem1;
-            if (number == 2) audioSource.clip = screem2;
+            if (number == 2) audioSource.clip = screem1;
             if (number == 3) audioSource.clip = screem3;
             audioSource.Play();
         }
-        yield return new WaitForSeconds(0.5f);
-
+        yield return new WaitForSeconds(1);
+        
         cooltime = false;
+        
+       
     }
     public IEnumerator ChargeVC() {
-
+        
+            
         if (cooltime2 == false)
         {
             cooltime2 = true;
-            int number;
-            number = Random.Range(1, 3);
-            if (number == 1) audioSource.clip = charge1;
-            if (number == 2) audioSource.clip = charge2;
-            if (number == 3) audioSource.clip = charge3;
-            audioSource.Play();
+            if (audioSource.clip != charge1 && audioSource.clip != charge2 && audioSource.clip != charge3)
+            {
+                
+                Debug.Log("" + 1);
+                int number;
+                number = Random.Range(1, 3);
+
+                if (number == 1) audioSource.clip = charge1;
+                if (number == 2) audioSource.clip = charge2;
+                if (number == 3) audioSource.clip = charge3;
+                audioSource.Play();
+            }
+
+           
         }
-        yield return new WaitForSeconds(2);
+        
+        yield return new WaitForSeconds(1);
 
         cooltime2 = false;
     }
@@ -55,6 +68,7 @@ public class playerVoice : SingletonMonoBehaviour<playerVoice>
     {
         if (cooltime3 == false)
         {
+            Debug.Log("startDamgeVC2");
             cooltime3 = true;
             int number;
             number = Random.Range(1, 3);
@@ -63,7 +77,7 @@ public class playerVoice : SingletonMonoBehaviour<playerVoice>
             if (number == 3) audioSource.PlayOneShot(damage3);
 
         }
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.25f);
 
         cooltime3 = false;
     }
