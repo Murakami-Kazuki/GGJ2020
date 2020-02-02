@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,17 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] GameObject[] DamageEffect = new GameObject[2];
     [HideInInspector] public float InitializeSpeed;
     [HideInInspector]public float angle;
+=======
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EnemyManager : MonoBehaviour
+{
+    [Header("敵速度")] public float EnemySpeed;
+    [HideInInspector] public float InitializeSpeed;
+    [HideInInspector] public float angle;
+>>>>>>> f926b771072920de5ca069a1838ab2cd427e0aae
     private CharacterController controller;
     private Vector3 moveDirection;
     private float gravity = 20.0f;
@@ -27,7 +39,7 @@ public class EnemyManager : MonoBehaviour
     void Update()
     {
         EnemyMove();
-
+        CheckEnemyHair();
     }
     private void OnEnable()
     {
@@ -39,7 +51,16 @@ public class EnemyManager : MonoBehaviour
 
 
     }
-    
+
+    void CheckEnemyHair()
+    {
+
+        if (enemyHair.hairObject.Count == 0)
+        {
+            Debug.Log("ハゲ");
+            bald = true;
+        }
+    }
 
     /*
     * 敵の向き
@@ -55,7 +76,7 @@ public class EnemyManager : MonoBehaviour
     public void OppositeRotate()
     {
         var currentAngle = transform.eulerAngles.y;
-        angle = currentAngle + (180 * Random.Range(-1,1));
+        angle = currentAngle + (180 * Random.Range(-1, 1));
     }
 
 
@@ -68,7 +89,7 @@ public class EnemyManager : MonoBehaviour
         rb.AddForce(transform.forward * EnemySpeed, ForceMode.Acceleration);
         RayTarget();
         EnemyAngle(angle);
-        
+
     }
 
     void RayTarget()
@@ -85,9 +106,10 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    
+
     void Hit()
     {
+<<<<<<< HEAD
 
     }
 
@@ -108,26 +130,54 @@ public class EnemyManager : MonoBehaviour
 
     }
     IEnumerator setfalseEffect(int level)
+=======
+        if (bald)
+        {
+            TakeHair();
+        }
+        else
+        {
+            GetHair();
+        }
+    }
+    void TakeHair()
+    {
+
+    }
+    void GetHair()
+>>>>>>> f926b771072920de5ca069a1838ab2cd427e0aae
     {
         DamageEffect[level + 1].SetActive(true);
 
         yield return new WaitForSeconds(2);
 
+<<<<<<< HEAD
         DamageEffect[level + 1].SetActive(false);
             
     }
 
      
+=======
+    }
+
+    void Knockback(Collision collision)
+    {
+        var c_rb = collision.transform.gameObject.GetComponent<Rigidbody>();
+        c_rb.AddForce(transform.forward * 5, ForceMode.Impulse);
+
+    }
+
+>>>>>>> f926b771072920de5ca069a1838ab2cd427e0aae
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.CompareTag("Player"))
         {
             Debug.Log("hit");
+            Knockback(collision);
             Hit();
 
-        }     
+
+        }
     }
-
-
 }
         

@@ -46,7 +46,13 @@ namespace Title
             canvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, rate);
         }
 
-        protected void UpdateAlpha(float sAlpha, float eAlpha, float duration)
+        protected void UpdateAlpha(float alpha)
+        {
+            if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
+            canvasGroup.alpha = alpha;
+        }
+
+        public void UpdateAlpha(float sAlpha, float eAlpha, float duration)
         {
             if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
             startAlpha = sAlpha;
@@ -66,8 +72,8 @@ namespace Title
         Coroutine movementCor;
         void MovePosition(AnimationCurve animationCurve, float currentRate)
         {
-            var animationRate = animationCurve.Evaluate(currentRate);
-            rectTrans.anchoredPosition = Vector2.Lerp(startPos, endPos, animationRate);
+            if (animationCurve != null) currentRate = animationCurve.Evaluate(currentRate);
+            rectTrans.anchoredPosition = Vector2.Lerp(startPos, endPos, currentRate);
         }
 
         public void MovePosition(AnimationCurve animationCurve, Vector2 idealPos, float duration, Action onFinish = null)

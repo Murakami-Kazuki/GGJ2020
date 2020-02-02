@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace Title
 {
@@ -45,19 +46,17 @@ namespace Title
         bool IsPressButton()
         {
             //TODO 入力受付
-            if (Input.GetButtonDown("DS4square"))
+            if (Input.GetButtonDown("DS4square") || Input.GetKey(KeyCode.A))
             {
                 return true;
             }
-            if (Input.GetMouseButtonDown(0)) return true;
             return false;
         }
 
         void OnPressAnyButton()
         {
             isPressButton = true;
-            //TODO scene移動
-            FadeManager.Instance.Fade(new Color(1, 1, 1, 0), Color.white, 0.4f, false, TransNextScene);
+            FadeManager.Instance.Fade(new Color(0, 0, 0, 0), Color.black, 0.4f, false, TransNextScene);
         }
 
 
@@ -66,6 +65,7 @@ namespace Title
             Debug.Log("ok. trans next scene.");
 
             onNextSceneAction();
+            SceneManager.LoadScene("Manga");
         }
     }
 }
