@@ -18,6 +18,8 @@ public class EnemyManager : MonoBehaviour
     EnemyHairManager enemyHair;
     public bool bald;
 
+    bool canMove = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +29,7 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!canMove) return;
         EnemyMove();
         CheckEnemyHair();
     }
@@ -126,6 +129,7 @@ public class EnemyManager : MonoBehaviour
         Destroy(effect);
 
     }
+
     void Knockback(Collision collision)
     {
         var c_rb = collision.transform.gameObject.GetComponent<Rigidbody>();
@@ -142,5 +146,22 @@ public class EnemyManager : MonoBehaviour
 
 
         }
+    }
+
+    public void Exit(Transform playerTrans)
+    {
+        var rb = GetComponent<Rigidbody>();
+        var power = 20;
+        var distance = (transform.position - playerTrans.position).normalized;
+        rb.constraints = RigidbodyConstraints.None;
+        distance.y = Random.Range(2, 4);
+        rb.AddForce(distance * power, ForceMode.Impulse);
+        rb.AddRelativeForce(new Vector3(Random.Range(0, 90), Random.Range(0, 90), Random.Range(0, 90)), ForceMode.Impulse);
+        canMove = false;
+        GetComponent<EnemyMoveChase>().enabled = false;
+        GetComponent<EnemyMoveEscape>().enabled = false;
+        GetComponent<Collider>().enabled = false;
+
+        Destroy(this.gameObject, 2f);
     }
 }

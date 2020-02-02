@@ -270,8 +270,18 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
         collision.gameObject.GetComponent<EnemyManager>().Hit(attackLevel);
 
         if (attackLevel <= 1) return;
-        if (attackLevel == 2) AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObjects(1));
-        if (attackLevel == 3) AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObjects(10)); //10ではなく全部
+        var dashHairAmount = 0;
+        if (attackLevel == 2) dashHairAmount = 1;
+        if (attackLevel == 3) dashHairAmount = 10;
+        var enemy = collision.gameObject.GetComponent<EnemyHairManager>();
+        var list = enemy.AttackAndGetHairObjects(dashHairAmount);
+        AddHair(list);
+        if (enemy.IsHage) enemy.GetComponent<EnemyManager>().Exit(this.transform);
+
+        /*if (attackLevel == 2)
+        {);
+            if (attackLevel == 3) AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObjects(10)); //10ではなく全部
+            */
     }
 
     public GameObject[] DamegeAndSendHairObjects(int damage)

@@ -16,7 +16,7 @@ public class playerVoice : SingletonMonoBehaviour<playerVoice>
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(cooltime + "" + cooltime2);
+        //Debug.Log(cooltime + "" + cooltime2);
     }
 
     public IEnumerator ScreemVC()
@@ -25,8 +25,8 @@ public class playerVoice : SingletonMonoBehaviour<playerVoice>
         if (cooltime == false)
         {
             cooltime = true;
-            
-            int number; 
+
+            int number;
             number = Random.Range(1, 3);
 
             if (number == 1) audioSource.clip = screem1;
@@ -37,7 +37,7 @@ public class playerVoice : SingletonMonoBehaviour<playerVoice>
         StopCoroutine(ChargeVC());
         yield return new WaitForSeconds(1);
 
-        
+
         cooltime = false;
 
 
@@ -51,17 +51,17 @@ public class playerVoice : SingletonMonoBehaviour<playerVoice>
             cooltime2 = true;
             if (audioSource.clip != charge1 && audioSource.clip != charge2 && audioSource.clip != charge3)
             {
-                
-                    int number;
-                    number = Random.Range(1, 3);
 
-                    if (number == 1) audioSource.clip = charge1;
-                    if (number == 2) audioSource.clip = charge2;
-                    if (number == 3) audioSource.clip = charge3;
-                    audioSource.Play();
-        
+                int number;
+                number = Random.Range(1, 3);
+
+                if (number == 1) audioSource.clip = charge1;
+                if (number == 2) audioSource.clip = charge2;
+                if (number == 3) audioSource.clip = charge3;
+                audioSource.Play();
+
             }
-  
+
 
 
 
@@ -69,7 +69,7 @@ public class playerVoice : SingletonMonoBehaviour<playerVoice>
 
         yield return new WaitForSeconds(0.5f);
 
-        
+
         cooltime2 = false;
     }
     public IEnumerator DamagteVC()
