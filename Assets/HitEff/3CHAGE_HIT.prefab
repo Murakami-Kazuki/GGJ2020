@@ -4728,7 +4728,7 @@ ParticleSystem:
 --- !u!199 &4276631479915026603
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -9484,7 +9484,7 @@ ParticleSystem:
 --- !u!199 &4276631480139461909
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -14240,7 +14240,7 @@ ParticleSystem:
 --- !u!199 &4276631480247900202
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -18996,7 +18996,7 @@ ParticleSystem:
 --- !u!199 &4276631480420925895
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -23758,7 +23758,7 @@ ParticleSystem:
 --- !u!199 &4276631481014211329
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -28514,7 +28514,7 @@ ParticleSystem:
 --- !u!199 &6411631990183885418
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -33270,7 +33270,7 @@ ParticleSystem:
 --- !u!199 &712942079545876460
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
