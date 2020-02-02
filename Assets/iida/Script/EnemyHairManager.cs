@@ -46,8 +46,9 @@ public class EnemyHairManager : MonoBehaviour
         }
     }
 
-    public void PrepareHair()
+    public void PrepareHair(bool isHage)
     {
+        if (isHage) return;
         var hairAmount = Random.Range(1, 5);
 
         for (int n = 0; n < hairAmount; n++)

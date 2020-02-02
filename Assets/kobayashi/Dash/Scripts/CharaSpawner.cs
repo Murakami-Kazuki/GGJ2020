@@ -45,7 +45,26 @@ public class CharaSpawner : SingletonMonoBehaviour<CharaSpawner>
             var prefab = GetEnemyPrefab();
             var enemy = Instantiate(prefab, spawnPos, Quaternion.identity);
             enemy.gameObject.SetActive(true);
-            enemy.GetComponent<EnemyHairManager>().PrepareHair();
+            enemy.GetComponent<EnemyHairManager>().PrepareHair(false);
+        }
+    }
+
+    public void SpawnHage()
+    {
+        var spawnAmount = 20;
+        //Debug.Log("okk");
+
+        for (int n = 0; n < spawnAmount; n++)
+        {
+            Vector3 spawnPos;
+            var canSpawn = GetSpawnPoint(out spawnPos);
+            if (!canSpawn) continue;
+            //Debug.Log("okk:" + spawnPos);
+            spawnPos.y = 2.16f;
+            var prefab = GetEnemyPrefab();
+            var enemy = Instantiate(prefab, spawnPos, Quaternion.identity);
+            enemy.gameObject.SetActive(true);
+            enemy.GetComponent<EnemyHairManager>().PrepareHair(true);
         }
     }
 
