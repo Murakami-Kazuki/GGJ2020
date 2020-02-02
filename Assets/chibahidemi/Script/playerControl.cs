@@ -143,6 +143,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
         //ボタン押してゲージをためる
         if (Input.GetButton("DS4square") || Input.GetKey(KeyCode.A))
         {
+            attackLevel = 0;
             if (hagage < maxHagage)
             {
                 hagage += 300f * Time.deltaTime;
@@ -162,24 +163,31 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
             if (200.0f <= hagage && hagage < 900f) PlayAnimation(AnimationType.attack2);
             hagage = 0;
             attackLevel = haGaugeUI.GaugeLevel;
-            haGaugeUI.UpdatePowerCallback(0f); //ゲージをリセット
+            Debug.Log("dash. attackLevel:" + attackLevel);
         }
         //Debug.Log(hagage);
 
 
         //ダッシュ後の挙動
-        if (1f < rb.velocity.magnitude)
+        if (!isAttack && 1f < rb.velocity.magnitude)
         {
             isAttack = true;
             aniCon.SetBool("isAttack", true);
         }
-        else
+        else if (isAttack && rb.velocity.magnitude < 1f)
         {
+            haGaugeUI.UpdatePowerCallback(0f); //ゲージをリセット
             isAttack = false;
             aniCon.SetBool("isAttack", false);
-            attackLevel = 0;
+            //attackLevel = 0;
+            StartCoroutine(LateAttacked());
         }
+    }
 
+    IEnumerator LateAttacked()
+    {
+        yield return new WaitForSeconds(1f);
+        if (!isAttack) attackLevel = 0;
     }
 
     void FixedUpdate()
@@ -218,12 +226,13 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
                 continue;
             hairObject.Add(_hairObject[i]);
             _hairObject[i].transform.parent = oyaTrans;
-            _hairObject[i].transform.localPosition = Vector3.up * 1.50f;
-            _hairObject[i].transform.Rotate(Vector3.up * (Random.value - 0.5f) * 360f, Space.World);
-            _hairObject[i].transform.Rotate(Vector3.right * (Random.value - 0.5f) * 50f, Space.Self);
+            _hairObject[i].transform.localPosition = Vector3.zero;
+            //_hairObject[i].transform.rotation = Quaternion.Euler(0, 0, 0);
+            //_hairObject[i].transform.localPosition = Vector3.up * 1.50f;
+            //_hairObject[i].transform.Rotate(Vector3.up * (Random.value - 0.5f) * 360f, Space.World);
+            //_hairObject[i].transform.Rotate(Vector3.right * (Random.value - 0.5f) * 50f, Space.Self);
             playerCanvas.GetHair(_hairObject[i].GetComponent<BaseHair>().myType);
         }
-
     }
 
 
@@ -247,11 +256,12 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
     private void OnCollisionEnter(Collision collision)
     {
         if (!collision.gameObject.CompareTag("Enemy")) return;
-        if (!isAttack)
+        if (!isAttack) //髪を奪われる
         {
-            collision.gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObjects(3));
+            var hairs = DamegeAndSendHairObjects(3); //自分の髪を取る
+            if (hairs == null || hairs.Length == 0) return;
+            collision.transform.GetComponent<EnemyHairManager>().AddHaire(hairs);
             StartCoroutine(playerVoice.Instance.DamagteVC());
-            Debug.Log("startDamgeVC");
             return;
         }
 
