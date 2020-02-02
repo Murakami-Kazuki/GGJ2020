@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -808,6 +808,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myType: 1
+--- !u!4 &455988038 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1254327413188665832, guid: 2188f7745d7934896b83a45505549858,
+    type: 3}
+  m_PrefabInstance: {fileID: 2001115068}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &461246145
 GameObject:
   m_ObjectHideFlags: 0
@@ -17792,34 +17798,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 331059033, guid: 25ccf1e36d4f44ab08c2124d2ec9e138, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 331059033, guid: 25ccf1e36d4f44ab08c2124d2ec9e138, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 331059033, guid: 25ccf1e36d4f44ab08c2124d2ec9e138, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 331059033, guid: 25ccf1e36d4f44ab08c2124d2ec9e138, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 331059033, guid: 25ccf1e36d4f44ab08c2124d2ec9e138, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 331059033, guid: 25ccf1e36d4f44ab08c2124d2ec9e138, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 807299715, guid: 25ccf1e36d4f44ab08c2124d2ec9e138, type: 3}
-      propertyPath: m_Constraints
-      value: 84
-      objectReference: {fileID: 0}
     - target: {fileID: 7626051463493702706, guid: 25ccf1e36d4f44ab08c2124d2ec9e138,
         type: 3}
       propertyPath: m_Name
@@ -18594,6 +18572,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1254327412257071315, guid: 2188f7745d7934896b83a45505549858,
         type: 3}
+      propertyPath: hairObject.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1254327412257071315, guid: 2188f7745d7934896b83a45505549858,
+        type: 3}
       propertyPath: haGaugeUI
       value: 
       objectReference: {fileID: 1523086330000684921}
@@ -18607,6 +18590,11 @@ PrefabInstance:
       propertyPath: playerCanvas
       value: 
       objectReference: {fileID: 284549079}
+    - target: {fileID: 1254327412257071315, guid: 2188f7745d7934896b83a45505549858,
+        type: 3}
+      propertyPath: oyaTrans
+      value: 
+      objectReference: {fileID: 455988038}
     - target: {fileID: 1254327412257071336, guid: 2188f7745d7934896b83a45505549858,
         type: 3}
       propertyPath: m_LocalPosition.x

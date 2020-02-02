@@ -166,6 +166,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
         {
             isAttack = false;
             aniCon.SetBool("isAttack", false);
+            attackLevel = 0;
         }
 
     }
@@ -196,7 +197,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
         transform.eulerAngles = Vector3.up * angleY;
     }
 
-
+    [SerializeField] Transform oyaTrans;
     public List<GameObject> hairObject;
     public void AddHair(GameObject[] _hairObject)
     {
@@ -205,7 +206,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
             if (_hairObject[i] == null)
                 continue;
             hairObject.Add(_hairObject[i]);
-            _hairObject[i].transform.parent = transform;
+            _hairObject[i].transform.parent = oyaTrans;
             _hairObject[i].transform.localPosition = Vector3.up * 1.50f;
             _hairObject[i].transform.Rotate(Vector3.up * (Random.value - 0.5f) * 360f, Space.World);
             _hairObject[i].transform.Rotate(Vector3.right * (Random.value - 0.5f) * 50f, Space.Self);
