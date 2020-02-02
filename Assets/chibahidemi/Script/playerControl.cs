@@ -249,9 +249,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
         if (!collision.gameObject.CompareTag("Enemy")) return;
         if (!isAttack)
         {
-            collision.gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObjects(3));
-            StartCoroutine(playerVoice.Instance.DamagteVC());
-            Debug.Log("startDamgeVC");
+            GetComponent<Collider>().gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObjects(3));
             return;
         }
 
