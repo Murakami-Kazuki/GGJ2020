@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9840c8985e2f4478999537f289c6127e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asset_enemy: {fileID: 4183012259313207896, guid: 5ae04ed3995fe4933a0be0b3c606f777,
+  asset_enemy: {fileID: 7626051463493702706, guid: 25ccf1e36d4f44ab08c2124d2ec9e138,
     type: 3}
 --- !u!1 &2527533321848016820
 GameObject:
