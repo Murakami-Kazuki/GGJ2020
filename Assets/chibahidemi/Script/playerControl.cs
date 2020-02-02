@@ -9,8 +9,55 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
     private const int PARAM_minSTR = 1;
 
 
+    //各種パラメーター
+    //カチカチ
+    private const float PARAM_chargeSpeed_min = 200f;
+    private const float PARAM_chargeSpeed_max = 1000f;
+    private const float PARAM_chargeSpeed_getHairParamUp = 20f;
+    //サラサラ
+    private const float PARAM_attackPower_min = 0.5f;
+    private const float PARAM_attackPower_max = 1.0f;
+    private const float PARAM_attackPower_getHairParamUp = 0.12f;
+    //もじゃもじゃ
+    private const float PARAM_rotateSpeed_min = 90f;
+    private const float PARAM_rotateSpeed_max = 360f;
+    private const float PARAM_rotateSpeed_getHairParamUp = 30f;
 
-    private float AngleSpeed = 90f;//回転スピード
+    private float param_chargeSpeed = PARAM_chargeSpeed_min;//charge速度
+    private float param_rotateSpeed = PARAM_rotateSpeed_min;//回転スピー
+    private float param_attackPower = PARAM_attackPower_min;//ダッシュの速さ
+    private enum GetHairType
+    {
+        kachikachi,
+        sarasara,
+        mojamoja,
+    }
+
+    /// <summary>
+    /// ステータス変化
+    /// </summary>
+    /// <param name="getHairType">ヘアータイプ</param>
+    /// <param name="getLength">取得ヘアー数</param>
+    private void GetHairPlusParam(GetHairType getHairType, int getLength = 1)
+    {
+        switch (getHairType)
+        {
+            case GetHairType.kachikachi:
+                param_chargeSpeed += PARAM_chargeSpeed_getHairParamUp * (float)getLength;
+                param_chargeSpeed = Mathf.Clamp(param_chargeSpeed, PARAM_chargeSpeed_min, PARAM_chargeSpeed_max);
+                break;
+            case GetHairType.sarasara:
+                param_rotateSpeed += PARAM_rotateSpeed_getHairParamUp * (float)getLength;
+                param_rotateSpeed = Mathf.Clamp(param_rotateSpeed, PARAM_rotateSpeed_min, PARAM_rotateSpeed_max);
+                break;
+            case GetHairType.mojamoja:
+                param_attackPower += PARAM_attackPower_getHairParamUp * (float)getLength;
+                param_attackPower = Mathf.Clamp(param_attackPower, PARAM_attackPower_min, PARAM_attackPower_max);
+                break;
+        }
+    }
+
+
     private float moveX = 0.0f;
     private float moveZ = 0.0f;
     public Rigidbody rb;
@@ -23,7 +70,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
 
     float hagage = 0.0f;
     float maxHagage = 300f;//ハゲージのmaxの値
-    float AttackPower = 0.5f;//ダッシュの速さ
+
     [SerializeField] Dash.HaGauge haGaugeUI; //ハゲージのUI
     [SerializeField] PlayerCanvas playerCanvas;
     int attackLevel; //アタック時のレベル
@@ -96,7 +143,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
         //ボタン離すとダッシュ
         if (Input.GetButtonUp("DS4square") || Input.GetKeyUp(KeyCode.A))
         {
-            rb.AddForce(transform.forward * hagage * AttackPower, ForceMode.Impulse);
+            rb.AddForce(transform.forward * hagage * param_attackPower, ForceMode.Impulse);
             if (0.0f <= hagage && hagage < 100f) PlayAnimation(AnimationType.attack0);
             if (100.0f <= hagage && hagage < 200f) PlayAnimation(AnimationType.attack1);
             if (200.0f <= hagage && hagage < 900f) PlayAnimation(AnimationType.attack2);
@@ -110,9 +157,6 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
         //ダッシュ後の挙動
         if (1f < rb.velocity.magnitude)
         {
-
-            //rb.AddForce(transform.right * moveX*100);
-            //rb.AddForce(transform.forward * AttackPower * 100f,ForceMode.Acceleration);
             isAttack = true;
             aniCon.SetBool("isAttack", true);
         }
@@ -145,7 +189,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
          (
           transform.eulerAngles.y,
           targetAngle,
-          AngleSpeed * Time.deltaTime
+          param_rotateSpeed * Time.deltaTime
          );
         transform.eulerAngles = Vector3.up * angleY;
     }
