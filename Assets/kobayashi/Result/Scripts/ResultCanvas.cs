@@ -15,15 +15,16 @@ namespace Result
 
         void Start()
         {
-            background.gameObject.SetActive(false);
+            //background.gameObject.SetActive(false);
             //ShowResult(AnnounceType.MojaMoja);
             FadeManager.Instance.Fade(Color.white, new Color(1, 1, 1, 0), 1f, true);
+            UpdateResult(SaveData.LoadAnnounce());
         }
 
         /// <summary>
         // リザルト画面を表示
         /// </summary>
-        public void ShowResult(AnnounceType type)
+        public void UpdateResult(AnnounceType type)
         {
             var dict = hairResult.MyHairDict;
             pointList[0].text = dict[HairType.SaraSara].ToString();
@@ -31,13 +32,13 @@ namespace Result
             pointList[2].text = dict[HairType.MojaMoja].ToString();
 
             resultText.text = hairResult.GetResult(type);
-            StartCoroutine(Show());
+            //StartCoroutine(Show());
         }
 
         IEnumerator Show()
         {
             //TODO アニメーションを追加
-            background.gameObject.SetActive(true);
+            //background.gameObject.SetActive(true);
             yield return null;
         }
     }

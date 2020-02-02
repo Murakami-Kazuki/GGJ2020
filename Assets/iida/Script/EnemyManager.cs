@@ -1,3 +1,4 @@
+
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,13 +6,14 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [Header("敵速度")] public float EnemySpeed;
+    [SerializeField] GameObject[] DamageEffect = new GameObject[2];
     [HideInInspector] public float InitializeSpeed;
     [HideInInspector]public float angle;
     private CharacterController controller;
     private Vector3 moveDirection;
     private float gravity = 20.0f;
 
-
+    GameObject effect;
     Rigidbody rb;
     EnemyHairManager enemyHair;
     public bool bald;
@@ -38,10 +40,11 @@ public class EnemyManager : MonoBehaviour
 
 
     }
+
     void CheckEnemyHair()
     {
 
-        if (enemyHair.hairObject.Count == 0)
+        if (enemyHair.IsHage)
         {
             Debug.Log("ハゲ");
             bald = true;
@@ -62,7 +65,7 @@ public class EnemyManager : MonoBehaviour
     public void OppositeRotate()
     {
         var currentAngle = transform.eulerAngles.y;
-        angle = currentAngle + (180 * Random.Range(-1,1));
+        angle = currentAngle + (180 * Random.Range(-1, 1));
     }
 
 
@@ -72,10 +75,10 @@ public class EnemyManager : MonoBehaviour
     private void EnemyMove()
     {
 
-        rb.AddForce(transform.forward * EnemySpeed, ForceMode.Force);
+        rb.AddForce(transform.forward * EnemySpeed, ForceMode.Acceleration);
         RayTarget();
         EnemyAngle(angle);
-        
+
     }
 
     void RayTarget()
@@ -87,41 +90,57 @@ public class EnemyManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit, distance, LayerMask.GetMask("Wall")))
         {
             OppositeRotate();
+            rb.velocity = Vector3.zero;
 
         }
     }
 
-    
-    void Hit()
+    public void Hit(int hagageLevel)
     {
-        if (bald)
+        Debug.Log("Hoge");
+        Debug.Log(hagageLevel);
+        
+        if (hagageLevel == 2)
         {
-            TakeHair();
+            effect = Instantiate(DamageEffect[0]);
+            effect.transform.position = transform.position;
+
         }
-        else
+        if (hagageLevel == 3)
         {
-            GetHair();
+            effect = Instantiate(DamageEffect[1]);
+            effect.transform.position = transform.position;
+
         }
-    }
-    void TakeHair()
-    {
-       
-    }
-    void GetHair()
-    {
+        StartCoroutine(setfalseEffect(hagageLevel,effect));
+
 
     }
-     
+    IEnumerator setfalseEffect(int hagageLevel,GameObject effect)
+
+    {
+        
+
+        yield return new WaitForSeconds(1);
+
+        Destroy(effect);
+
+    }
+    void Knockback(Collision collision)
+    {
+        var c_rb = collision.transform.gameObject.GetComponent<Rigidbody>();
+        c_rb.AddForce(transform.forward * 5, ForceMode.Impulse);
+
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.CompareTag("Player"))
         {
-            Debug.Log("hit");
-            Hit();
+            
+            Knockback(collision);
 
-        }     
+
+        }
     }
-
-
 }
-        

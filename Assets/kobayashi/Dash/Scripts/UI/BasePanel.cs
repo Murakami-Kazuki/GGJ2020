@@ -29,7 +29,7 @@ namespace Dash
         {
             Start,
             Game,
-            End,
+            Finish,
         }
     }
 }
