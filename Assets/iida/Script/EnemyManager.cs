@@ -42,7 +42,7 @@ public class EnemyManager : MonoBehaviour
     void CheckEnemyHair()
     {
 
-        if (enemyHair.hairObject.Count == 0)
+        if (enemyHair.IsHage)
         {
             Debug.Log("ハゲ");
             bald = true;
@@ -132,4 +132,3 @@ public class EnemyManager : MonoBehaviour
         }
     }
 }
-        
