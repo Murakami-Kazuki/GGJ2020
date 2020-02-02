@@ -261,7 +261,7 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
             var hairs = DamegeAndSendHairObjects(3); //自分の髪を取る
             if (hairs == null || hairs.Length == 0) return;
             collision.transform.GetComponent<EnemyHairManager>().AddHaire(hairs);
-            //GetComponent<Collider>().gameObject.GetComponent<EnemyHairManager>().AddHaire(hairs);
+            StartCoroutine(playerVoice.Instance.DamagteVC());
             return;
         }
 

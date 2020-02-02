@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class statusUI : MonoBehaviour
 {
     private GameObject fadeObj;
-    float alpha=0.0f;
+    float alpha=1.0f;
     private RectTransform rect;
 
     // Start is called before the first frame update
@@ -28,14 +28,14 @@ public class statusUI : MonoBehaviour
     void FadeOut()
     {
         fadeObj.GetComponent<Image>().color = new Color(1, 1, 1, alpha);
-        alpha -= Time.deltaTime;
+        alpha -= Time.deltaTime*3.0f;
         //rect.sizeDelta = new Vector2(0,0);
     }
 
-    /*void FadeIn()
+    void FadeIn()
     {
         fadeObj.GetComponent<Image>().color = new Color(1, 1, 1, alpha);
         alpha += Time.deltaTime * 2;
 
-    }*/
+    }
 }
