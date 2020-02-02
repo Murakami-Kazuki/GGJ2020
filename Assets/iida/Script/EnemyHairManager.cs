@@ -13,7 +13,7 @@ public class EnemyHairManager : MonoBehaviour
 
     void Awake()
     {
-        PrepareHair();
+        //PrepareHair();
     }
 
 
@@ -46,9 +46,9 @@ public class EnemyHairManager : MonoBehaviour
         }
     }
 
-    void PrepareHair()
+    public void PrepareHair()
     {
-        var hairAmount = Random.Range(0, 5);
+        var hairAmount = Random.Range(1, 5);
 
         for (int n = 0; n < hairAmount; n++)
         {
@@ -56,7 +56,10 @@ public class EnemyHairManager : MonoBehaviour
             var hair = Instantiate(hairPrefab);
             hair.transform.SetParent(hairOyaTrans);
             hair.transform.localPosition = Vector3.zero;
+            hair.transform.localRotation = Quaternion.Euler(0, 0, 0);
             hairPartsList.Add(hair);
+            hair.GetComponent<BaseHair>().Activate();
+            //Debug.Log("added hair:" + hair.name);
         }
 
     }

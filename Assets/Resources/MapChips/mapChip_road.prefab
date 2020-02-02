@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2527533321825313893}
   - component: {fileID: 2527533321825313892}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: mapChip_road
-  m_TagString: Untagged
+  m_TagString: Road
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 2527533321848016823}
   - component: {fileID: 2527533321848016824}
   - component: {fileID: 2527533321848016825}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2527533322245864625}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
