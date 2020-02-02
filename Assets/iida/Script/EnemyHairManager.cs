@@ -4,41 +4,41 @@ using UnityEngine;
 
 public class EnemyHairManager : MonoBehaviour
 {
-    public List<GameObject> hairObject = new List<GameObject>();
-    // Start is called before the first frame update
-    void Start()
+    List<GameObject> hairPartsList = new List<GameObject>();
+    [SerializeField] Transform hairOyaTrans;
+    public bool IsHage
     {
-
+        get { return hairPartsList.Count == 0; }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
+        PrepareHair();
     }
 
 
-    public GameObject[] AttackAndGetHairObjects(int damage)
+    public GameObject[] AttackAndGetHairObjects(int damage) //髪を取られる
     {
         GameObject[] _hairObject = new GameObject[damage];
         for (int i = 0; i < damage; i++)
         {
-            if (hairObject.Count <= 0)
+            if (hairPartsList.Count <= 0)
                 break;
-            int randomID = Random.RandomRange(0, hairObject.Count);
-            _hairObject[i] = hairObject[randomID];
-            hairObject.RemoveAt(randomID);
+            int randomID = Random.RandomRange(0, hairPartsList.Count);
+            _hairObject[i] = hairPartsList[randomID];
+            hairPartsList.RemoveAt(randomID);
         }
-        hairObject.Clear();
+        hairPartsList.Clear();
         return _hairObject;
     }
 
-    public void AddHaire(GameObject[] hair)
+    public void AddHaire(GameObject[] hair) //髪を奪う
     {
         for (int i = 0; i < hair.Length; i++)
         {
             if (hair[i] == null)
                 continue;
-            hairObject.Add(hair[i]);
+            hairPartsList.Add(hair[i]);
             hair[i].transform.parent = transform;
             hair[i].transform.localPosition = Vector3.up * 0.8f;
             hair[i].transform.Rotate(Vector3.up * (Random.value - 0.5f) * 360f, Space.World);
@@ -46,8 +46,19 @@ public class EnemyHairManager : MonoBehaviour
         }
     }
 
-    public void PrepareHair()
+    void PrepareHair()
     {
+        var hairAmount = Random.Range(0, 5);
+
+        for (int n = 0; n < hairAmount; n++)
+        {
+            var hairPrefab = HairManager.Instance.GetHairPrefab();
+            var hair = Instantiate(hairPrefab);
+            hair.transform.SetParent(hairOyaTrans);
+            hair.transform.localPosition = Vector3.zero;
+            hairPartsList.Add(hair);
+        }
+
     }
 
 
