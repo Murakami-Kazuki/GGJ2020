@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMover : MonoBehaviour
+public class TargetTracker : MonoBehaviour
 {
     Vector3 basePos;
     [SerializeField] Transform targetTrans;

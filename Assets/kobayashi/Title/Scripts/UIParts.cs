@@ -52,7 +52,7 @@ namespace Title
             canvasGroup.alpha = alpha;
         }
 
-        protected void UpdateAlpha(float sAlpha, float eAlpha, float duration)
+        public void UpdateAlpha(float sAlpha, float eAlpha, float duration)
         {
             if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
             startAlpha = sAlpha;

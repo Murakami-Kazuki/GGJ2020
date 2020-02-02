@@ -59,6 +59,7 @@ namespace Dash
             if (startFillAmount == endFillAmount) return;
             if (duration <= 0) duration = 0.01f;
             if (fillCor != null) StopCoroutine(fillCor);
+            if (!this.gameObject.activeInHierarchy) return;
             fillCor = StartCoroutine(DoCoroutine(duration, null, UpdateFillAmount, onFinish));
         }
 
