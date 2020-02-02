@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8356809551674661127}
+  - component: {fileID: 5920449604043664680}
   m_Layer: 0
   m_Name: hairObject (5)
   m_TagString: Untagged
@@ -31,6 +32,19 @@ Transform:
   m_Father: {fileID: 4183012259313207876}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 265.498, z: -34.018}
+--- !u!114 &5920449604043664680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175118426905857344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb72ff338e0174be9946b5885da154b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myType: 1
 --- !u!1 &1209379225930505476
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,6 +54,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8462465650420123678}
+  - component: {fileID: 2080753656412097868}
   m_Layer: 0
   m_Name: hairObject (3)
   m_TagString: Untagged
@@ -62,6 +77,19 @@ Transform:
   m_Father: {fileID: 4183012259313207876}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 121.812004, z: -34.018}
+--- !u!114 &2080753656412097868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209379225930505476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb72ff338e0174be9946b5885da154b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myType: 1
 --- !u!1 &1236226934489893320
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,6 +190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2139794554414943801}
+  - component: {fileID: 1512481084716506594}
   m_Layer: 0
   m_Name: hairObject
   m_TagString: Untagged
@@ -184,6 +213,19 @@ Transform:
   m_Father: {fileID: 4183012259313207876}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1512481084716506594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843895138260073637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb72ff338e0174be9946b5885da154b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myType: 1
 --- !u!1 &2207154030800476195
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +417,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8877096925126747489}
+  - component: {fileID: 2049716763436886440}
   m_Layer: 0
   m_Name: hairObject (2)
   m_TagString: Untagged
@@ -397,6 +440,19 @@ Transform:
   m_Father: {fileID: 4183012259313207876}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 54.974003, z: -34.018}
+--- !u!114 &2049716763436886440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3296784295722482980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb72ff338e0174be9946b5885da154b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myType: 1
 --- !u!1 &4183012259313207896
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,6 +852,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1340629792933987079}
+  - component: {fileID: 3706219045507074639}
   m_Layer: 0
   m_Name: hairObject (1)
   m_TagString: Untagged
@@ -818,6 +875,19 @@ Transform:
   m_Father: {fileID: 4183012259313207876}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -34.018}
+--- !u!114 &3706219045507074639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8759067844938264565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb72ff338e0174be9946b5885da154b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myType: 1
 --- !u!1 &8928485399923879613
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,6 +897,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9050894547913831521}
+  - component: {fileID: 1658326259115288915}
   m_Layer: 0
   m_Name: hairObject (4)
   m_TagString: Untagged
@@ -849,6 +920,19 @@ Transform:
   m_Father: {fileID: 4183012259313207876}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 191.805, z: -34.018}
+--- !u!114 &1658326259115288915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8928485399923879613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb72ff338e0174be9946b5885da154b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myType: 1
 --- !u!1 &9159440148834904917
 GameObject:
   m_ObjectHideFlags: 0

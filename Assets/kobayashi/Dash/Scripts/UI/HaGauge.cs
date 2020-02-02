@@ -10,7 +10,7 @@ namespace Dash
     {
         [SerializeField] protected Image fillArea;
         protected float minValue = 0f;
-        protected float maxValue = 0.574f;
+        protected float maxValue = 1f;// 0.574f;
         public float FillAmount
         {
             get { return fillArea.fillAmount; }
