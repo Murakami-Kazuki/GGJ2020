@@ -1,5 +1,5 @@
 
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour
     [Header("敵速度")] public float EnemySpeed;
     [SerializeField] GameObject[] DamageEffect = new GameObject[2];
     [HideInInspector] public float InitializeSpeed;
-    [HideInInspector]public float angle;
+    [HideInInspector] public float angle;
     private CharacterController controller;
     private Vector3 moveDirection;
     private float gravity = 20.0f;
@@ -46,7 +46,7 @@ public class EnemyManager : MonoBehaviour
 
         if (enemyHair.IsHage)
         {
-            Debug.Log("ハゲ");
+            //Debug.Log("ハゲ");
             bald = true;
         }
     }
@@ -99,7 +99,7 @@ public class EnemyManager : MonoBehaviour
     {
         Debug.Log("Hoge");
         Debug.Log(hagageLevel);
-        
+
         if (hagageLevel == 2)
         {
             effect = Instantiate(DamageEffect[0]);
@@ -112,14 +112,14 @@ public class EnemyManager : MonoBehaviour
             effect.transform.position = transform.position;
 
         }
-        StartCoroutine(setfalseEffect(hagageLevel,effect));
+        StartCoroutine(setfalseEffect(hagageLevel, effect));
 
 
     }
-    IEnumerator setfalseEffect(int hagageLevel,GameObject effect)
+    IEnumerator setfalseEffect(int hagageLevel, GameObject effect)
 
     {
-        
+
 
         yield return new WaitForSeconds(1);
 
@@ -137,7 +137,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            
+
             Knockback(collision);
 
 

@@ -95,6 +95,8 @@ namespace Dash
         public void Announce()
         {
             announceUI.Show();
+            if (Random.value < 0.1f)
+                CharaSpawner.Instance.SpawnHage();
         }
     }
 }
