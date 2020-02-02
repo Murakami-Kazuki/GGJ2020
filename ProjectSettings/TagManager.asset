@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - Enemy
+  - Road
   layers:
   - Default
   - TransparentFX
@@ -18,10 +19,10 @@ TagManager:
   - PostProcessing
   - Wall
   - Player
+  - Road
   - 
   - 
-  - 
-  - 
+  - kamihubuki
   - 
   - 
   - 
