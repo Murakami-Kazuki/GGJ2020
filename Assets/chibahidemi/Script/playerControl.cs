@@ -195,6 +195,8 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
             return;
         }
 
+        collision.gameObject.GetComponent<EnemyManager>().Hit(attackLevel);
+
         if (attackLevel == 0) return;
         if (attackLevel == 1) AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObjects(1));
         if (attackLevel == 2) AddHair(collision.gameObject.GetComponent<EnemyHairManager>().AttackAndGetHairObjects(10)); //10ではなく全部
