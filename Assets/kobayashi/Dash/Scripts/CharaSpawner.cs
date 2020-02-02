@@ -32,7 +32,7 @@ public class CharaSpawner : SingletonMonoBehaviour<CharaSpawner>
 
     void SpawnFirst()
     {
-        var spawnAmount = 30;
+        var spawnAmount = 50;
         //Debug.Log("okk");
 
         for (int n = 0; n < spawnAmount; n++)
