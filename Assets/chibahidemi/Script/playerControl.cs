@@ -127,6 +127,17 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
             moveZ = 0;
         }
 
+        if (Input.GetKey(KeyCode.Z))
+        {
+            moveX = 1;
+            lookAtVectol();
+        }
+        else if (Input.GetKey(KeyCode.X))
+        {
+            moveX = -1;
+            lookAtVectol();
+        }
+
         lookAtVec = new Vector3(moveX, 0, -moveZ);
 
         //ボタン押してゲージをためる
@@ -241,6 +252,8 @@ public class playerControl : SingletonMonoBehaviour<playerControl>
             GetComponent<Collider>().gameObject.GetComponent<EnemyHairManager>().AddHaire(DamegeAndSendHairObjects(3));
             return;
         }
+
+        Debug.Log("collide. attackLevel:" + attackLevel);
 
         collision.gameObject.GetComponent<EnemyManager>().Hit(attackLevel);
 
