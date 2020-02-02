@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [Header("敵速度")] public float EnemySpeed;
+    [SerializeField] GameObject[] DamageEffect = new GameObject[2];
     [HideInInspector] public float InitializeSpeed;
     [HideInInspector]public float angle;
     private CharacterController controller;
@@ -64,7 +65,7 @@ public class EnemyManager : MonoBehaviour
     private void EnemyMove()
     {
 
-        rb.AddForce(transform.forward * EnemySpeed, ForceMode.Force);
+        rb.AddForce(transform.forward * EnemySpeed, ForceMode.Acceleration);
         RayTarget();
         EnemyAngle(angle);
         
@@ -79,6 +80,7 @@ public class EnemyManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit, distance, LayerMask.GetMask("Wall")))
         {
             OppositeRotate();
+            rb.velocity = Vector3.zero;
 
         }
     }
@@ -86,23 +88,35 @@ public class EnemyManager : MonoBehaviour
     
     void Hit()
     {
-        if (bald)
-        {
-            TakeHair();
-        }
-        else
-        {
-            GetHair();
-        }
-    }
-    void TakeHair()
-    {
-       
-    }
-    void GetHair()
-    {
 
     }
+
+    void Hit_Effect(int hagageLevel)
+    {
+        switch (hagageLevel)
+        {
+            case 1:
+                Instantiate(DamageEffect[0], transform.position, Quaternion.identity);
+                break;
+            case 2:
+                Instantiate(DamageEffect[1], transform.position, Quaternion.identity);
+                break;
+        }
+       
+        StartCoroutine(setfalseEffect(hagageLevel));
+
+
+    }
+    IEnumerator setfalseEffect(int level)
+    {
+        DamageEffect[level + 1].SetActive(true);
+
+        yield return new WaitForSeconds(2);
+
+        DamageEffect[level + 1].SetActive(false);
+            
+    }
+
      
     private void OnCollisionEnter(Collision collision)
     {
