@@ -13,7 +13,7 @@ public class EnemyManager : MonoBehaviour
     private Vector3 moveDirection;
     private float gravity = 20.0f;
 
-
+    GameObject effect;
     Rigidbody rb;
     EnemyHairManager enemyHair;
     public bool bald;
@@ -95,35 +95,35 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-
-    void Hit()
+    public void Hit(int hagageLevel)
     {
-
-
-    }
-
-    void Hit_Effect(int hagageLevel)
-    {
-        switch (hagageLevel)
+        Debug.Log("Hoge");
+        Debug.Log(hagageLevel);
+        
+        if (hagageLevel == 2)
         {
-            case 1:
-                Instantiate(DamageEffect[0], transform.position, Quaternion.identity);
-                break;
-            case 2:
-                Instantiate(DamageEffect[1], transform.position, Quaternion.identity);
-                break;
+            effect = Instantiate(DamageEffect[0]);
+            effect.transform.position = transform.position;
+
         }
-       
-        StartCoroutine(setfalseEffect(hagageLevel));
+        if (hagageLevel == 3)
+        {
+            effect = Instantiate(DamageEffect[1]);
+            effect.transform.position = transform.position;
+
+        }
+        StartCoroutine(setfalseEffect(hagageLevel,effect));
 
 
     }
-    IEnumerator setfalseEffect(int level)
+    IEnumerator setfalseEffect(int hagageLevel,GameObject effect)
 
     {
-        DamageEffect[level + 1].SetActive(true);
+        
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
+
+        Destroy(effect);
 
     }
     void Knockback(Collision collision)
@@ -137,9 +137,8 @@ public class EnemyManager : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            Debug.Log("hit");
+            
             Knockback(collision);
-            Hit();
 
 
         }

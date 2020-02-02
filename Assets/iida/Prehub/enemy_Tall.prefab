@@ -421,16 +421,17 @@ GameObject:
   m_Component:
   - component: {fileID: 6988389513388912756}
   - component: {fileID: 6988389513379356556}
-  - component: {fileID: 1260988561}
   - component: {fileID: 1260988564}
   - component: {fileID: 1260988556}
   - component: {fileID: 1260988557}
   - component: {fileID: 1260988558}
   - component: {fileID: 1260988559}
   - component: {fileID: 1260988560}
+  - component: {fileID: 1837061094}
+  - component: {fileID: 1837061093}
   m_Layer: 0
   m_Name: enemy_Tall
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -470,22 +471,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!54 &1260988561
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6988389513388878932}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
 --- !u!136 &1260988564
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -565,11 +550,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemySpeed: 8
   DamageEffect:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7493861921950950436, guid: 019db38772f4a0a419806336bad4206b, type: 3}
+  - {fileID: 4276631479829053936, guid: 492bfa781986e6242b1a37ca1f89599a, type: 3}
   InitializeSpeed: 0
   angle: 0
   bald: 0
+--- !u!54 &1837061094
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6988389513388878932}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 94
+  m_CollisionDetection: 0
+--- !u!136 &1837061093
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6988389513388878932}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.25
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!1 &6988389513388878936
 GameObject:
   m_ObjectHideFlags: 0
