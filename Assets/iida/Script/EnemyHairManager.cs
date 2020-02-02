@@ -8,7 +8,7 @@ public class EnemyHairManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -44,6 +44,10 @@ public class EnemyHairManager : MonoBehaviour
             hair[i].transform.Rotate(Vector3.up * (Random.value - 0.5f) * 360f, Space.World);
             hair[i].transform.Rotate(Vector3.right * (Random.value - 0.5f) * 50f, Space.Self);
         }
+    }
+
+    public void PrepareHair()
+    {
     }
 
 
